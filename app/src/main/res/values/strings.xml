@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">alqudra</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hi_zaid_omar">Hi,Zaid Omar</string>
+    <string name="_12_jan">12 - Jan</string>
+    <string name="view_info_trips">View Info Trips</string>
+    <string name="delivery_trip_completed">Delivery trip completed</string>
 </resources>

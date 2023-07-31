@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="actionBarGrey">#4D555B</color>
+    <color name="BackgroundGrey">#F4F4F4</color>
+    <color name="background">#ECEDEE</color>
+    <color name="red">#EC1C24</color>
+    <color name="darkGreyColor">#4D555B</color>
+    <color name="info_text_color">#4D555B</color>
+    <color name="selected_buttn_color">#899196</color>
 </resources>

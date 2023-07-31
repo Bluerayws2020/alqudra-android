@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.blueray.alqudra.fragments.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"
+        >
+        <action
+            android:id="@+id/action_home_to_tripsFragment"
+            app:destination="@id/tripsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/travel"
+        android:name="com.blueray.alqudra.fragments.TravelFragment"
+        android:label="fragment_travel"
+        tools:layout="@layout/fragment_travel" />
+    <fragment
+        android:id="@+id/notifications"
+        android:name="com.blueray.alqudra.fragments.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/tripsFragment"
+        android:name="com.blueray.alqudra.fragments.TripsFragment"
+        android:label="fragment_trips"
+        tools:layout="@layout/fragment_trips" >
+        <action
+            android:id="@+id/action_tripsFragment_to_tripsListFragment"
+            app:destination="@id/tripsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripsListFragment"
+        android:name="com.blueray.alqudra.fragments.TripsListFragment"
+        android:label="fragment_trips_list"
+        tools:layout="@layout/fragment_trips_list" >
+        <action
+            android:id="@+id/action_tripsListFragment_to_tripDataFragment"
+            app:destination="@id/tripDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripDataFragment"
+        android:name="com.blueray.alqudra.fragments.TripDataFragment"
+        android:label="fragment_trip_data"
+        tools:layout="@layout/fragment_trip_data" >
+        <action
+            android:id="@+id/action_tripDataFragment_to_fromBeforeRideFragment"
+            app:destination="@id/fromBeforeRideFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fromBeforeRideFragment"
+        android:name="com.blueray.alqudra.fragments.FromBeforeRideFragment"
+        android:label="FromBeforeRideFragment"
+        tools:layout="@layout/fragment_from_before_ride"
+        />
+</navigation>

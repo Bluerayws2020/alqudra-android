@@ -16,6 +16,8 @@ import java.util.*
 object HelpersUtils {
 
     val SHARED_PREF = "SHARED_PREF"
+    var SELECTED_TRIP_TYPE = ""
+    var SELECTED_TRIP_STATUS = ""
 
     fun hideKeyBoard(activity: Activity) {
         //Find the currently focused view, so we can grab the correct window token from it.

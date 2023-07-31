@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/home"
+        />
+    <item
+        android:id="@+id/placeHolder1"
+        android:icon="@drawable/line"
+        android:title=""
+        android:checkable="false"
+        />
+
+    <item
+        android:id="@+id/travel"
+        android:title="Travel"
+        android:icon="@drawable/vector"
+        />
+    <item
+        android:id="@+id/placeHolder2"
+        android:icon="@drawable/line"
+        android:title=""
+        android:checkable="false"
+        />
+
+    <item
+        android:id="@+id/info"
+        android:title="Info"
+        android:icon="@drawable/user"
+        />
+
+</menu>
