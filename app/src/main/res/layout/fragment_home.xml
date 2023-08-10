@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layoutDirection="ltr"
     android:layout_height="match_parent">
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,6 +56,7 @@ android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent"
+
             android:background="@drawable/buttun_blue_corner"
             android:backgroundTint="@color/darkGreyColor"
             android:layout_marginEnd="10sp"

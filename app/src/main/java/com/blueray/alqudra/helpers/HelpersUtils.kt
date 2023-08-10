@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.blueray.alqudra.api.inProgressRides.Data
 import java.util.*
 
 object HelpersUtils {
@@ -18,6 +19,9 @@ object HelpersUtils {
     val SHARED_PREF = "SHARED_PREF"
     var SELECTED_TRIP_TYPE = ""
     var SELECTED_TRIP_STATUS = ""
+
+    var SELECTED_TRIP_TYPE_ID = ""
+    var SELECTED_TRIP_STATUS_ID= ""
 
     fun hideKeyBoard(activity: Activity) {
         //Find the currently focused view, so we can grab the correct window token from it.

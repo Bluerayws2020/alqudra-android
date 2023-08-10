@@ -8,9 +8,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object ApiClient {
+object  ApiClient {
 
-    private const val USER_BASE_URL = "https://sdce5.blueraydev.com/api/"
+    private const val USER_BASE_URL = "http://alqudrahbooking.br-ws.com.dedi5536.your-server.de/qudrah/web/"
 
     private fun getRetrofit(baseUrl: String): Retrofit {
         val okHttpClient = OkHttpClient.Builder()

@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.blueray.alqudra.R
 import com.blueray.alqudra.databinding.FragmentHomeBinding
+import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_STATUS_ID
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE
+import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE_ID
 import com.blueray.alqudra.viewModels.AppViewModel
 
 
@@ -28,10 +30,17 @@ class HomeFragment: BaseFragment<FragmentHomeBinding,AppViewModel>() {
 
         binding.deliveryTripBtn.setOnClickListener {
             SELECTED_TRIP_TYPE ="Delivery Trips"
+
+
+            SELECTED_TRIP_TYPE_ID ="1"
+
             findNavController().navigate(R.id.action_home_to_tripsFragment)
         }
         binding.pickUpTripsBtn.setOnClickListener {
             SELECTED_TRIP_TYPE ="Pickup Trips"
+
+            SELECTED_TRIP_TYPE_ID  ="2"
+
             findNavController().navigate(R.id.action_home_to_tripsFragment)
         }
         binding.includeTap.notifications.setOnClickListener {

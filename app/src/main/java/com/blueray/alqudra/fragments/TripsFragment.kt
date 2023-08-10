@@ -11,6 +11,7 @@ import com.blueray.alqudra.R
 import com.blueray.alqudra.activities.MainActivity
 import com.blueray.alqudra.databinding.FragmentTripsBinding
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_STATUS
+import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_STATUS_ID
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE
 import com.blueray.alqudra.viewModels.AppViewModel
 
@@ -39,18 +40,25 @@ class TripsFragment : BaseFragment<FragmentTripsBinding,AppViewModel>() {
 
         binding.inProcessTripBtn.setOnClickListener {
             SELECTED_TRIP_STATUS = "In Process Trips"
+            SELECTED_TRIP_STATUS_ID = "1"
             findNavController().navigate(R.id.action_tripsFragment_to_tripsListFragment)
         }
         binding.upComingBtn.setOnClickListener {
             SELECTED_TRIP_STATUS = "Up Coming Trips"
+            SELECTED_TRIP_STATUS_ID = "2"
+
             findNavController().navigate(R.id.action_tripsFragment_to_tripsListFragment)
         }
         binding.completeTripsBtn.setOnClickListener {
             SELECTED_TRIP_STATUS = "Complete Trips"
+            SELECTED_TRIP_STATUS_ID = "3"
+
             findNavController().navigate(R.id.action_tripsFragment_to_tripsListFragment)
         }
         binding.canceledTripsBtn.setOnClickListener {
             SELECTED_TRIP_STATUS = "Canceled Trips"
+            SELECTED_TRIP_STATUS_ID = "4"
+
             findNavController().navigate(R.id.action_tripsFragment_to_tripsListFragment)
         }
     }

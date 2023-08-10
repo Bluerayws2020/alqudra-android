@@ -5,6 +5,7 @@
     android:id="@+id/deliveryTripBtn"
     android:layout_width="match_parent"
     android:layout_height="135dp"
+    android:layoutDirection="ltr"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/imageView"

@@ -9,6 +9,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="25dp"
+        android:layoutDirection="ltr"
+
         android:layout_height="25dp"
         android:src="@drawable/pin_1"
         />

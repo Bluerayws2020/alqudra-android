@@ -33,9 +33,9 @@ class TravelFragment : BaseFragment<FragmentTravelBinding,TravelViewModel>() {
             findNavController().navigate(R.id.notifications)
         }
 
-        val lm = LinearLayoutManager(requireContext())
-        travelAdapter = TravelAdapter(listOf())
-        binding.TravelsRv.adapter = travelAdapter
+//        val lm = LinearLayoutManager(requireContext())
+//        travelAdapter = TravelAdapter(listOf())
+//        binding.TravelsRv.adapter = travelAdapter
 
     }
 

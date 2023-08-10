@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.TripsFragment"
     android:background="@color/background"
+    android:layoutDirection="ltr"
+
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
