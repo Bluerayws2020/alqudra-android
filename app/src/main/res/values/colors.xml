@@ -14,4 +14,7 @@
     <color name="darkGreyColor">#4D555B</color>
     <color name="info_text_color">#4D555B</color>
     <color name="selected_buttn_color">#899196</color>
+    <color name="drawerHeadercolor">#4D555B</color>
+    <color name="drawerBackGround">#E5E6E7</color>
+    <color name="drawerIconStrockColor">#D2DBE0</color>
 </resources>

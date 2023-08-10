@@ -12,6 +12,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.blueray.alqudra.api.inProgressRides.Data
+
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import java.util.*
 
 object HelpersUtils {
@@ -67,5 +70,15 @@ object HelpersUtils {
         val configuration = Configuration()
         configuration.locale = locale
         resources.updateConfiguration(configuration, resources.displayMetrics)}
+
+
+    /*this function can be replaced by setting theme to no action bar theme and
+      calling AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) in the app class*/
+    fun setUpActivity(activity: AppCompatActivity){
+        activity.supportActionBar?.hide()
+        // calling this method in one Activity made it action in all the activities in the app
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) // should be called Once in App life cycle but no problem to call it more
+
+    }
 
 }

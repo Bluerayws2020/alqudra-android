@@ -13,7 +13,12 @@
         >
         <action
             android:id="@+id/action_home_to_tripsFragment"
-            app:destination="@id/tripsFragment" />
+            app:destination="@id/tripsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/travel"
@@ -32,7 +37,11 @@
         tools:layout="@layout/fragment_trips" >
         <action
             android:id="@+id/action_tripsFragment_to_tripsListFragment"
-            app:destination="@id/tripsListFragment" />
+            app:destination="@id/tripsListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/pickuListFragment"
@@ -50,7 +59,11 @@
         tools:layout="@layout/fragment_trips_list" >
         <action
             android:id="@+id/action_tripsListFragment_to_tripDataFragment"
-            app:destination="@id/tripDataFragment" />
+            app:destination="@id/tripDataFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/tripDataFragment"
@@ -59,7 +72,11 @@
         tools:layout="@layout/fragment_trip_data" >
         <action
             android:id="@+id/action_tripDataFragment_to_fromBeforeRideFragment"
-            app:destination="@id/fromBeforeRideFragment" />
+            app:destination="@id/fromBeforeRideFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/fromBeforeRideFragment"
