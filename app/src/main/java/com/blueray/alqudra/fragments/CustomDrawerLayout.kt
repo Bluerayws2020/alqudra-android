@@ -22,21 +22,31 @@ class CustomDrawerLayout : Fragment() {
         // set click listeners
         binding.profileLayout.setOnClickListener {
             onItemSelected?.invoke(Options.PROFILE_LAYOUT)
+            setSelectedItem(Options.PROFILE_LAYOUT)
         }
         binding.drivingViolationLayout.setOnClickListener {
             onItemSelected?.invoke(Options.DRIVING_VIOLATION)
+            setSelectedItem(Options.DRIVING_VIOLATION)
         }
         binding.notificationLayout.setOnClickListener {
             onItemSelected?.invoke(Options.NOTIFICATIONS)
+            setSelectedItem(Options.NOTIFICATIONS)
         }
         binding.termsAndConditionsLayout.setOnClickListener {
             onItemSelected?.invoke(Options.TERMS_AND_CONDITIONS)
+            setSelectedItem(Options.TERMS_AND_CONDITIONS)
         }
         binding.callSupport.setOnClickListener {
             onItemSelected?.invoke(Options.CALL_SUPPORT)
+            setSelectedItem(Options.CALL_SUPPORT)
         }
         binding.SignOut.setOnClickListener {
             onItemSelected?.invoke(Options.SIGN_OUT)
+            setSelectedItem(Options.SIGN_OUT)
+        }
+        binding.headerLayout.setOnClickListener {
+            onItemSelected?.invoke(Options.MY_DATA)
+            setSelectedItem(Options.MY_DATA)
         }
 
 
@@ -63,6 +73,8 @@ class CustomDrawerLayout : Fragment() {
             }
             _selectedItem = selectedItem
         }
+
+        // todo add function to add data to the drawer header
     }
 
     enum class Options {
@@ -71,6 +83,7 @@ class CustomDrawerLayout : Fragment() {
         NOTIFICATIONS,
         TERMS_AND_CONDITIONS,
         CALL_SUPPORT,
-        SIGN_OUT
+        SIGN_OUT,
+        MY_DATA
     }
 }

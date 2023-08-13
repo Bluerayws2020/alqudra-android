@@ -70,6 +70,15 @@
             app:layout_constraintStart_toEndOf="@+id/view5"
             app:layout_constraintTop_toBottomOf="@+id/view5" />
         <View
+            android:id="@+id/headerLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/placeHolder2"
+            />
+        <View
             android:id="@+id/placeHolder2"
             android:layout_width="match_parent"
             android:layout_height="1dp"

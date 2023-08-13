@@ -22,6 +22,6 @@ class VehicleViolationAdapter(
     //list.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
     }
 }
