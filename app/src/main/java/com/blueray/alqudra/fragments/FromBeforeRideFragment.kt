@@ -72,8 +72,9 @@ class FromBeforeRideActivity : AppCompatActivity() {
         binding.includedTap.back.setOnClickListener {
             onBackPressed()
         }
-        binding.includedTap.title.text = SELECTED_TRIP_STATUS
         binding.includedTap.notifications.hide()
+        binding.includedTap.menu.hide()
+        binding.includedTap.title.text = SELECTED_TRIP_STATUS
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(applicationContext!!)
 

@@ -9,7 +9,7 @@ import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.helpers.HelpersUtils.setUpActivity
 import com.blueray.alqudra.helpers.ViewUtils.hide
 
-class PrivacyPolicyActivity : AppCompatActivity() {
+class PrivacyPolicyActivity : BaseActivity() {
 
     private lateinit var binding : ActivityPrivacyPolicyBinding
 
@@ -23,7 +23,7 @@ class PrivacyPolicyActivity : AppCompatActivity() {
 
         // show only the back button in the actionBar
         binding.includedTap.notifications.hide()
-        binding.includedTap.notifications.hide()
+        binding.includedTap.menu.hide()
 
         // on back pressed implementation
         binding.includedTap.back.setOnClickListener {

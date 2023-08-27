@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -13,7 +14,7 @@ import com.blueray.alqudra.R
 import com.blueray.alqudra.databinding.ActivityMainBinding
 import com.blueray.alqudra.fragments.CustomDrawerLayout
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,10 +60,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openDrawer() {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.END))
-            binding.drawerLayout.closeDrawer(GravityCompat.END)
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START))
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
         else
-            binding.drawerLayout.openDrawer(GravityCompat.END)
+            binding.drawerLayout.openDrawer(GravityCompat.START)
     }
 
     private fun handelDrawerClick(){
@@ -105,5 +106,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun hideMenu(){
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+    fun showDrawer(){
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+    }
+
+
 
 }

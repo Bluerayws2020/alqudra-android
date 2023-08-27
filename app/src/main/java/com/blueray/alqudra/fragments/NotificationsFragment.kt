@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.blueray.alqudra.R
+import com.blueray.alqudra.activities.MainActivity
 import com.blueray.alqudra.databinding.FragmentNotificationsBinding
+import com.blueray.alqudra.helpers.ViewUtils.hide
 import com.blueray.alqudra.viewModels.NotificationViewModel
 
 
@@ -23,6 +25,17 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding,Notifica
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // lock drawer
+        (activity as MainActivity).hideMenu()
+
+        binding.includedTap.back.setOnClickListener {
+            (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()
+        }
+        binding.includedTap.notifications.hide()
+        binding.includedTap.menu.hide()
+
+
     }
 
 }

@@ -14,7 +14,7 @@ import com.blueray.alqudra.databinding.ActivityMainBinding
 import com.blueray.alqudra.databinding.ActivitySplashScreenBinding
 import com.blueray.alqudra.helpers.HelpersUtils
 
-class SplashScreen : AppCompatActivity() {
+class SplashScreen : BaseActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,10 +24,9 @@ class SplashScreen : AppCompatActivity() {
 
         supportActionBar?.hide()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        HelpersUtils.setDefaultLanguage(this,"ar")
+        HelpersUtils.setDefaultLanguage(this,"en")
         supportActionBar?.hide()
 
 
@@ -49,8 +48,11 @@ class SplashScreen : AppCompatActivity() {
 
         }else{
             Handler(Looper.getMainLooper()).postDelayed({
-                startActivity(Intent(this, LoginActivaty::class.java))
+
+                startActivity(Intent(this,MainActivity::class.java))
                 finish()
+//                startActivity(Intent(this, LoginActivaty::class.java))
+//                finish()
             }, 3000)
 
         }

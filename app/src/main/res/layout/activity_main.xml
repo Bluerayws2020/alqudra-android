@@ -48,10 +48,11 @@
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
     <fragment
+        android:id="@+id/drawer"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:name="com.blueray.alqudra.fragments.CustomDrawerLayout"
-        android:layout_gravity="end"
+        android:layout_gravity="start"
         tools:layout="@layout/fragment_custom_drawer_layout"
         />
 </androidx.drawerlayout.widget.DrawerLayout>

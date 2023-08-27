@@ -6,8 +6,9 @@ import com.blueray.alqudra.R
 import com.blueray.alqudra.databinding.ActivityTechnicalSupportBinding
 import com.blueray.alqudra.fragments.CustomDrawerLayout
 import com.blueray.alqudra.helpers.HelpersUtils.setUpActivity
+import com.blueray.alqudra.helpers.ViewUtils.hide
 
-class TechnicalSupportActivity : AppCompatActivity() {
+class TechnicalSupportActivity : BaseActivity() {
 
     private lateinit var binding : ActivityTechnicalSupportBinding
 
@@ -18,6 +19,13 @@ class TechnicalSupportActivity : AppCompatActivity() {
 
         // set Up Activity
         setUpActivity(this)
+
+
+        binding.includedTap.back.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+        binding.includedTap.notifications.hide()
+        binding.includedTap.menu.hide()
 
 
 

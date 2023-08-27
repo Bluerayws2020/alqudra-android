@@ -22,6 +22,7 @@ import com.blueray.alqudra.api.inProgressRides.Data
 import com.blueray.alqudra.databinding.FragmentPickupBinding
 import com.blueray.alqudra.databinding.FragmentTripsBinding
 import com.blueray.alqudra.helpers.HelpersUtils
+import com.blueray.alqudra.helpers.ViewUtils.hide
 import com.blueray.alqudra.model.NetworkResults
 import com.blueray.alqudra.viewModels.AppViewModel
 
@@ -51,6 +52,17 @@ class PickupFragment : BaseFragment<FragmentPickupBinding,AppViewModel>(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // lock drawer
+        (activity as MainActivity).hideMenu()
+
+        binding.includeTap.back.setOnClickListener {
+            (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()
+        }
+        binding.includeTap.notifications.hide()
+        binding.includeTap.menu.hide()
+
+
         val orederID = arguments?.getSerializable("orderId") as? String
 Log.d("orderIdorderId",orederID.toString())
 

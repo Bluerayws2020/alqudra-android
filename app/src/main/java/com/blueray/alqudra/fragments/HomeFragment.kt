@@ -13,6 +13,7 @@ import com.blueray.alqudra.databinding.FragmentHomeBinding
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_STATUS_ID
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE_ID
+import com.blueray.alqudra.helpers.ViewUtils.hide
 import com.blueray.alqudra.viewModels.AppViewModel
 
 
@@ -28,6 +29,9 @@ class HomeFragment: BaseFragment<FragmentHomeBinding,AppViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // unlock drawer
+        (activity as MainActivity).showDrawer()
 
         binding.includeTap.menu.setOnClickListener {
             (requireActivity() as MainActivity).openDrawer()

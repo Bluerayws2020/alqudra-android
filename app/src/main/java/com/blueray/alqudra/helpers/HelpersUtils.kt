@@ -94,6 +94,10 @@ object HelpersUtils {
             config,
             context.resources.displayMetrics
         )
+        val sharedPreferences = context.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
+        val editor =sharedPreferences.edit()
+        editor.putString("lang",lang)
+        editor.apply()
     }
 //    fun changeLang(): String {
 //        return if (HomeActivity.Lang == ARABIC_LANGUAGE)

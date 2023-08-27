@@ -40,9 +40,14 @@ class TripsListFragment() : BaseFragment<FragmentTripsListBinding,AppViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // lock drawer
+        (activity as MainActivity).hideMenu()
+
         binding.includeTap.back.setOnClickListener {
-            (requireActivity() as MainActivity).onBackPressed()
+            (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()
         }
+        binding.includeTap.notifications.hide()
+        binding.includeTap.menu.hide()
 
 
 Log.d("≈!!!", HelpersUtils.SELECTED_TRIP_STATUS_ID)

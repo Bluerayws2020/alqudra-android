@@ -48,9 +48,15 @@ private lateinit var  inmodel:InProgeassModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // lock drawer
+        (activity as MainActivity).hideMenu()
+
         binding.includedTap.back.setOnClickListener {
-            (requireActivity() as MainActivity).onBackPressed()
+            (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()
         }
+        binding.includedTap.notifications.hide()
+        binding.includedTap.menu.hide()
+
         binding.includedTap.title.text = SELECTED_TRIP_STATUS
         binding.includedTap.notifications.setOnClickListener {
             findNavController().navigate(R.id.notifications)

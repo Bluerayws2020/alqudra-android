@@ -9,7 +9,7 @@ import com.blueray.alqudra.databinding.ActivityVehicleViolaitionsBinding
 import com.blueray.alqudra.helpers.HelpersUtils.setUpActivity
 import com.blueray.alqudra.helpers.ViewUtils.hide
 
-class VehicleViolationsActivity : AppCompatActivity() {
+class VehicleViolationsActivity : BaseActivity() {
 
     private lateinit var vehicleAdapter: VehicleViolationAdapter
     private lateinit var binding:ActivityVehicleViolaitionsBinding
@@ -24,7 +24,7 @@ class VehicleViolationsActivity : AppCompatActivity() {
 
         // show only the back button in the actionBar
         binding.includedTap.notifications.hide()
-        binding.includedTap.notifications.hide()
+        binding.includedTap.menu.hide()
 
         // on back pressed implementation
         binding.includedTap.back.setOnClickListener {

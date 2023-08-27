@@ -18,7 +18,7 @@ import com.blueray.alqudra.helpers.HelpersUtils.getUserNameAndPassword
 import com.blueray.alqudra.model.NetworkResults
 import com.blueray.alqudra.viewModels.AppViewModel
 
-class LoginActivaty : AppCompatActivity() {
+class LoginActivaty : BaseActivity() {
     private var isChecked=true
     private var progressDialog = ProgressDialogFragment()
 
