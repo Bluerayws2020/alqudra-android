@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class Data(
     val currency: String,
-    val customer_info: X0 ,
+    val customer_info: X0? = null ,
 //    val from_branch_group: List<Any>,
 //    val from_customer_group: List<Any>,
     val order_id: String,

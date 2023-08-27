@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blueray.alqudra.TripTraking
 import com.blueray.alqudra.api.inProgressRides.InProgeassModel
+import com.blueray.alqudra.api.inProgressRides.LoginModel
 import com.blueray.alqudra.api.inProgressRides.Msg
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
 import com.blueray.alqudra.helpers.HelpersUtils
@@ -21,7 +22,7 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
     private val deviceId = HelpersUtils.getAndroidID(application.applicationContext)
     private val repo = Repo
     private val language = "ar"
-    private val uid = "7"
+    private val uid = HelpersUtils.getUID(application.applicationContext)
 
 
     private val sharedPreferences: SharedPreferences =
@@ -36,6 +37,7 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
 
     private val updateTripLive = MutableLiveData<NetworkResults<UpdateTripResponse>>()
     private val tripTrakingLive = MutableLiveData<NetworkResults<TripTraking>>()
+    private val loginLiveData = MutableLiveData<NetworkResults<LoginModel>>()
 
 
 
@@ -46,7 +48,7 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
     ){
         viewModelScope.launch {
             inPrograssLive.value=repo.InProgressRides (
-               "7",
+               uid,
                 language
 
             )
@@ -65,7 +67,7 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
     ){
         viewModelScope.launch {
             upCommingTripLive.value=repo.upCommingTrip (
-                "7",
+                uid,
                 language
 
             )
@@ -82,7 +84,7 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
     ){
         viewModelScope.launch {
             completdTripLive.value=repo.completdTrip (
-                "7",
+                uid,
                 language
 
             )
@@ -98,7 +100,7 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
     ){
         viewModelScope.launch {
             cancelTripLive.value=repo.cancelTrip (
-                "7",
+                uid,
                 language
 
             )
@@ -116,7 +118,7 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
     ){
         viewModelScope.launch {
             tripTrakingLive.value=repo.tripTracking (
-                "7",
+                uid,
                 language,
                 orederID
 
@@ -142,7 +144,7 @@ fun updateTrip(
     ){
     viewModelScope.launch {
         updateTripLive.value=repo.updateTtip (
-            "7",
+            uid,
             language,
             order_id,
             trip_type,group_type,kilos,fuel,img,lat,long
@@ -152,6 +154,23 @@ fun updateTrip(
     }
 }
     fun getUpdateTrip()=updateTripLive
+
+
+    fun retriveLoginModel(
+        email:String,
+        password:String,
+
+
+
+        ){
+        viewModelScope.launch {
+            loginLiveData.value=repo.loginModel (
+              email,password,deviceId,language
+
+            )
+        }
+    }
+    fun getLogin()=loginLiveData
 
 
 

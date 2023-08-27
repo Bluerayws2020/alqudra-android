@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">القدرة</string>
+    <string name="hi_zaid_omar">مرحبا</string>
+    <string name="view_info_trips">عرض معلومات الرحلة</string>
+    <string name="delivery_trip_completed">اكتملت الرحلة</string>
+    <string name="save">حفظ</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="full_name">الاسم الكامل</string>
+    <string name="mobile_number">"رقم الهاتف "</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="birthday">تاريخ الميلاد</string>
+    <string name="customer_care_center">مركز خدمة العملاء</string>
+    <string name="type">"النوع "</string>
+    <string name="attach_an_image">ارفق الصورة</string>
+    <string name="send">ارسال</string>
+    <string name="no_data">لا يوجد بيانات</string>
+    <string name="password">كلمة السر </string>
+</resources>

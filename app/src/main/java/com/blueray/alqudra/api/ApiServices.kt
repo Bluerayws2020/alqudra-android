@@ -2,6 +2,7 @@ package com.blueray.alqudra.api
 
 import com.blueray.alqudra.TripTraking
 import com.blueray.alqudra.api.inProgressRides.InProgeassModel
+import com.blueray.alqudra.api.inProgressRides.LoginModel
 import com.blueray.alqudra.api.inProgressRides.Msg
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
 import okhttp3.MultipartBody
@@ -12,6 +13,18 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 
 interface ApiServices {
+
+    @Multipart
+    @POST("login/")
+    suspend fun loginApi(
+        @Header("Authorization") auth: String,
+
+        @Part("user_name") phone: RequestBody,
+        @Part("password") otp: RequestBody,
+        @Part("mac") device_player_id: RequestBody,
+        @Part("lang") lang: RequestBody,
+
+        ): LoginModel
 
 
     @Multipart

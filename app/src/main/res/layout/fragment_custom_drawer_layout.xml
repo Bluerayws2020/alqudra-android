@@ -6,27 +6,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_constraintDimensionRatio="314:824"
     tools:context=".fragments.CustomDrawerLayout"
-
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        app:layout_constraintDimensionRatio="314:824"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/drawerBackGround"
-        >
+        app:layout_constraintDimensionRatio="314:824"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:id="@+id/arrow_img"
             android:layout_width="8dp"
             android:layout_height="20dp"
-            android:src="@drawable/drawer_arrow"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="60dp"
             android:layout_marginStart="30dp"
-            />
+            android:layout_marginTop="60dp"
+            android:src="@drawable/drawer_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImage"
@@ -51,13 +49,12 @@
             android:id="@+id/nameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="Zaid Omar"
             android:textColor="@color/drawerHeadercolor"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/view5"
-            app:layout_constraintStart_toEndOf="@+id/view5"
-            android:layout_marginStart="10dp"
-            />
+            app:layout_constraintStart_toEndOf="@+id/view5" />
 
         <TextView
             android:id="@+id/mobileNumberTv"
@@ -69,299 +66,306 @@
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/view5"
             app:layout_constraintTop_toBottomOf="@+id/view5" />
+
         <View
             android:id="@+id/headerLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/placeHolder2"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <View
             android:id="@+id/placeHolder2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            app:layout_constraintTop_toBottomOf="@id/mobileNumberTv"
             android:layout_marginTop="15dp"
             android:background="#E7C0C2"
-            />
+            app:layout_constraintTop_toBottomOf="@id/mobileNumberTv" />
+
         <LinearLayout
             android:id="@+id/profileLayout"
-            app:layout_constraintTop_toBottomOf="@id/placeHolder2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="20sp"
             android:paddingBottom="20sp"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/placeHolder2">
+
             <ImageView
                 android:layout_width="7dp"
                 android:layout_height="35dp"
-                android:src="@drawable/selection_img"
-                />
+                android:src="@drawable/selection_img" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
-                android:background="@drawable/drawer_icon_images_background"
-                >
+                android:background="@drawable/drawer_icon_images_background">
+
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:padding="9dp"
-                    android:src="@drawable/profile_drawer_icon"
-                    />
+                    android:src="@drawable/profile_drawer_icon" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profile"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 android:fontFamily="@font/medium"
-                />
+                android:text="Profile"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
         </LinearLayout>
+
         <View
             android:id="@+id/placeHolder3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            app:layout_constraintTop_toBottomOf="@id/profileLayout"
-            android:background="@color/drawerIconStrockColor"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            />
+            android:background="@color/drawerIconStrockColor"
+            app:layout_constraintTop_toBottomOf="@id/profileLayout" />
+
         <LinearLayout
             android:id="@+id/drivingViolationLayout"
-            app:layout_constraintTop_toBottomOf="@id/placeHolder3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal"
             android:paddingTop="20sp"
             android:paddingBottom="20sp"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/placeHolder3">
+
             <ImageView
-                android:visibility="invisible"
                 android:layout_width="7dp"
                 android:layout_height="35dp"
                 android:src="@drawable/selection_img"
-                />
+                android:visibility="invisible" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
-                android:background="@drawable/drawer_icon_images_background"
-                >
+                android:background="@drawable/drawer_icon_images_background">
+
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:padding="9dp"
-                    android:src="@drawable/driving_violations_icon"
-                    />
+                    android:src="@drawable/driving_violations_icon" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Driving violations"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 android:fontFamily="@font/medium"
-                />
+                android:text="Driving violations"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
         </LinearLayout>
+
         <View
             android:id="@+id/placeHolder4"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            app:layout_constraintTop_toBottomOf="@id/drivingViolationLayout"
-            android:background="@color/drawerIconStrockColor"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            />
+            android:background="@color/drawerIconStrockColor"
+            app:layout_constraintTop_toBottomOf="@id/drivingViolationLayout" />
+
         <LinearLayout
             android:id="@+id/notificationLayout"
-            app:layout_constraintTop_toBottomOf="@id/placeHolder4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="20sp"
             android:paddingBottom="20sp"
-            >
+            app:layout_constraintTop_toBottomOf="@id/placeHolder4">
+
             <ImageView
-                android:visibility="invisible"
                 android:layout_width="7dp"
                 android:layout_height="35dp"
                 android:src="@drawable/selection_img"
-                />
+                android:visibility="invisible" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
-                android:background="@drawable/drawer_icon_images_background"
-                >
+                android:background="@drawable/drawer_icon_images_background">
+
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:padding="9dp"
-                    android:src="@drawable/notifications_drawer_icon"
-                    />
+                    android:src="@drawable/notifications_drawer_icon" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notification"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 android:fontFamily="@font/medium"
-                />
+                android:text="Notification"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
         </LinearLayout>
+
         <View
             android:id="@+id/placeHolder5"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            app:layout_constraintTop_toBottomOf="@id/notificationLayout"
-            android:background="@color/drawerIconStrockColor"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            />
+            android:background="@color/drawerIconStrockColor"
+            app:layout_constraintTop_toBottomOf="@id/notificationLayout" />
+
         <LinearLayout
             android:id="@+id/termsAndConditionsLayout"
-            app:layout_constraintTop_toBottomOf="@id/placeHolder5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="20sp"
             android:paddingBottom="20sp"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/placeHolder5">
+
             <ImageView
-                android:visibility="invisible"
                 android:layout_width="7dp"
                 android:layout_height="35dp"
                 android:src="@drawable/selection_img"
-                />
+                android:visibility="invisible" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
-                android:background="@drawable/drawer_icon_images_background"
-                >
+                android:background="@drawable/drawer_icon_images_background">
+
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:padding="9dp"
-                    android:src="@drawable/terms_and_conditions1"
-                    />
+                    android:src="@drawable/terms_and_conditions1" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Terms &amp; conditions"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 android:fontFamily="@font/medium"
-                />
+                android:text="Terms &amp; conditions"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/SignOut"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="60dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
             android:orientation="horizontal"
             android:paddingTop="20sp"
             android:paddingBottom="20sp"
-            >
+            app:layout_constraintBottom_toBottomOf="parent">
+
             <ImageView
-                android:visibility="invisible"
                 android:layout_width="7dp"
                 android:layout_height="35dp"
                 android:src="@drawable/selection_img"
-                />
+                android:visibility="invisible" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
-                android:background="@drawable/drawer_icon_images_background"
-                >
+                android:background="@drawable/drawer_icon_images_background">
+
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:padding="9dp"
-                    android:src="@drawable/sign_out_icon"
-                    />
+                    android:src="@drawable/sign_out_icon" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign out"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 android:fontFamily="@font/medium"
-                />
+                android:text="Sign out"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/callSupport"
-            app:layout_constraintBottom_toTopOf="@id/SignOut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="20sp"
             android:paddingBottom="20sp"
-            >
+            app:layout_constraintBottom_toTopOf="@id/SignOut">
+
             <ImageView
-                android:visibility="invisible"
                 android:layout_width="7dp"
                 android:layout_height="35dp"
                 android:src="@drawable/selection_img"
-                />
+                android:visibility="invisible" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
-                android:background="@drawable/drawer_icon_images_background"
-                >
+                android:background="@drawable/drawer_icon_images_background">
+
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:padding="9dp"
-                    android:src="@drawable/call_support_icon"
-                    />
+                    android:src="@drawable/call_support_icon" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Call support"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
                 android:fontFamily="@font/medium"
-                />
+                android:text="Call support"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
         </LinearLayout>
+
         <View
             android:id="@+id/placeHolder6"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            app:layout_constraintTop_toBottomOf="@id/callSupport"
-            android:background="@color/drawerIconStrockColor"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            />
+            android:background="@color/drawerIconStrockColor"
+            app:layout_constraintTop_toBottomOf="@id/callSupport" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
