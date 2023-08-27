@@ -27,7 +27,7 @@ class SplashScreen : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        HelpersUtils.setDefaultLanguage(this,"en")
+        HelpersUtils.setDefaultLanguage(this,"ar")
         supportActionBar?.hide()
 
 
