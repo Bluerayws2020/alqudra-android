@@ -151,7 +151,7 @@
                     android:clickable="false"
                     android:focusable="false"
                     android:editable="false"
-                    android:text="Feedback"
+                    android:text="@string/feedback"
                     android:textColor="#4D555B66"
                     android:textSize="20sp"
                     android:fontFamily="@font/regular"

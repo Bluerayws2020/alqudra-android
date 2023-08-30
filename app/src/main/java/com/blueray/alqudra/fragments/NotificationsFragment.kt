@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blueray.alqudra.R
 import com.blueray.alqudra.activities.MainActivity
+import com.blueray.alqudra.adapters.NotificationAdapter
 import com.blueray.alqudra.databinding.FragmentNotificationsBinding
 import com.blueray.alqudra.helpers.ViewUtils.hide
 import com.blueray.alqudra.viewModels.NotificationViewModel
@@ -35,7 +37,15 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding,Notifica
         binding.includedTap.notifications.hide()
         binding.includedTap.menu.hide()
 
+        initRv()
 
+
+    }
+
+    private fun initRv() {
+        // init recycler
+        binding.notificationsRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.notificationsRv.adapter = NotificationAdapter(listOf())
     }
 
 }

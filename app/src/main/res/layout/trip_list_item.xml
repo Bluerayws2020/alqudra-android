@@ -5,7 +5,6 @@
     android:id="@+id/deliveryTripBtn"
     android:layout_width="match_parent"
     android:layout_height="135dp"
-    android:layoutDirection="ltr"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/imageView"
@@ -14,7 +13,7 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="7dp"
+        android:layout_width="14dp"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:background="@drawable/buttun_red_corner"
@@ -31,15 +30,14 @@
         android:background="@drawable/buttun_blue_corner"
         android:backgroundTint="@color/darkGreyColor"
         android:layout_marginEnd="10sp"
+        android:layout_marginStart="-7dp"
         >
 
         <TextView
             android:id="@+id/title"
             android:layout_width="166dp"
             android:layout_height="96dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Trips"
+            android:text="@string/trip"
             android:fontFamily="@font/medium"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -48,14 +46,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="20dp"
-            android:gravity="top|start"
             />
         <TextView
             android:id="@+id/tripId"
             android:layout_width="166dp"
             android:layout_height="96dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
             android:text="#1222"
             android:fontFamily="@font/semibold"
             android:textColor="@color/white"
@@ -76,7 +71,7 @@
             android:layout_marginBottom="25dp"
             android:fontFamily="@font/medium"
             android:gravity="center_vertical|start"
-            android:text="view More"
+            android:text="@string/view_more"
             android:textColor="@color/white"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"

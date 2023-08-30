@@ -34,7 +34,7 @@
             android:layout_height="70dp"
             android:backgroundTint="@color/selected_buttn_color"
             android:fontFamily="@font/medium"
-            android:text="Accept"
+            android:text="@string/accept"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp"

@@ -26,7 +26,7 @@ class SplashScreen : BaseActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        HelpersUtils.setDefaultLanguage(this,"en")
+        HelpersUtils.setDefaultLanguage(this,"ar")
         supportActionBar?.hide()
 
 
@@ -49,10 +49,10 @@ class SplashScreen : BaseActivity() {
         }else{
             Handler(Looper.getMainLooper()).postDelayed({
 
-                startActivity(Intent(this,MainActivity::class.java))
-                finish()
-//                startActivity(Intent(this, LoginActivaty::class.java))
+//                startActivity(Intent(this,MainActivity::class.java))
 //                finish()
+                startActivity(Intent(this, LoginActivaty::class.java))
+                finish()
             }, 3000)
 
         }

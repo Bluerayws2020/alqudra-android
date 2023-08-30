@@ -1,24 +1,68 @@
 <resources>
-    <string name="app_name" translatable="false">alqudra</string>
+    <string name="app_name" >alqudra</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="hi_zaid_omar" translatable="false">Hi,Zaid Omar</string>
-    <string name="_12_jan" translatable="false">12 - Jan</string>
-    <string name="view_info_trips" translatable="false">View Info Trips</string>
-    <string name="delivery_trip_completed" translatable="false">Delivery trip completed</string>
+    <string name="hi_zaid_omar" >Hi,Zaid Omar</string>
+    <string name="_12_jan">12 - Jan</string>
+    <string name="view_info_trips" >View Info Trips</string>
+    <string name="delivery_trip_completed" >Delivery trip completed</string>
     <string name="lorem_ipsum_is_simply_dummy_text_of_the_n_printing_and_typesetting_industry_lorem_n_ipsum_has_been_the_industry_s_standard_n_dummy_text_ever_since_the_1500s_when_an_n_unknown_printer_took_a_galley_of_type_and_n_scrambled_it_to_make_a_type_specimen_book_n_n_it_has_survived_not_only_five_centuries_but_also_n_the_into_electronic_typesetting_remaining_n_essentially_unchanged_it_was_popularised_in_n_the_1960s_with_the_release_of_letraset_sheets_n_containing_lorem_ipsum_passages_and_more_n_recently_with_desktop_publishing_software_like_n_aldus_pagemaker_including_versions_of_lorem_n_ipsum_contrary_to_popular_n_n_45_bc_making_it_over_2000_years_old_richard_nmcclintock_a_latin_professor_at_hampden_n_sydney_college_in_virginia_looked_up_one_of_n_the_more_obscure_latin_words" translatable="false">Lorem Ipsum is simply dummy text of the\n printing and typesetting industry. Lorem\n Ipsum has been the industry’s standard.\n Dummy text ever since the 1500s, when an\n unknown printer took a galley of type and\n scrambled it to make a type specimen book.\n\nIt has survived not only five centuries, but also\n the into electronic typesetting, remaining\n essentially unchanged. It was popularised in\n the 1960s with the release of Letraset sheets\n containing Lorem Ipsum passages, and more\n recently with desktop publishing software like\nAldus PageMaker including versions of Lorem\n Ipsum.Contrary to popular\n\n45 BC, making it over 2000 years old. Richard\nMcClintock, a Latin professor at Hampden\n-Sydney College in Virginia, looked up one of\n the more obscure Latin words.</string>
-    <string name="save" translatable="false">Save</string>
-    <string name="username" translatable="false">UserName</string>
-    <string name="id_8223427" translatable="false">ID:8223427</string>
-    <string name="full_name" translatable="false">Full Name</string>
-    <string name="mobile_number" translatable="false">Mobile Number</string>
-    <string name="email" translatable="false">Email</string>
-    <string name="birthday" translatable="false">Birthday</string>
-    <string name="customer_care_center" translatable="false">Customer care center</string>
-    <string name="type" translatable="false">Type</string>
-    <string name="your_message" translatable="false">Your Message</string>
-    <string name="attach_an_image" translatable="false">Attach an image</string>
-    <string name="send" translatable="false">Send</string>
-    <string name="no_data" translatable="false">No Data</string>
+    <string name="save">Save</string>
+    <string name="username" >UserName</string>
+    <string name="id_8223427" >ID:8223427</string>
+    <string name="full_name" >Full Name</string>
+    <string name="mobile_number" >Mobile Number</string>
+    <string name="email" >Email</string>
+    <string name="birthday" >Birthday</string>
+    <string name="customer_care_center" >Customer care center</string>
+    <string name="type" >Type</string>
+    <string name="your_message" >Your Message</string>
+    <string name="attach_an_image" >Attach an image</string>
+    <string name="send" >Send</string>
+    <string name="no_data" >No Data</string>
     <string name="password">Password</string>
+    <string name="feedback">Feedback</string>
+    <string name="profile">Profile</string>
+    <string name="driving_violations">Driving violations</string>
+    <string name="notification">Notification</string>
+    <string name="terms_amp_conditions"><![CDATA[Terms & conditions]]></string>
+    <string name="call_support">Call support</string>
+    <string name="sign_out">Sign out</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="full">Full</string>
+    <string name="fuel">Fuel</string>
+    <string name="km">KM</string>
+    <string name="car_speedometer">Car speedometer</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="delivery_n_trips">Delivery \n Trips</string>
+    <string name="pickup_n_trips">Pickup \n Trips</string>
+    <string name="view_more">view More</string>
+    <string name="update_trip">Update Trip</string>
+    <string name="new_trip_to_jumera">New trip to Jumera</string>
+    <string name="from_al_qudra_branch">From: %S</string>
+    <string name="trip">Trip</string>
+    <string name="alqudra_branch">Alqudra Branch</string>
+    <string name="in_process_n_trips">In Process\n Trips</string>
+    <string name="up_coming_n_trips">Up Coming \n Trips</string>
+    <string name="complete_n_trips">Complete \n Trips</string>
+    <string name="canceled_n_trips">Canceled \n Trips</string>
+    <string name="description_delivery_trip">Description Delivery Trip</string>
+    <string name="ride_info">Ride Info</string>
+    <string name="car_info">Car Info</string>
+    <string name="add_info">Add Info</string>
+    <string name="name">Name:</string>
+    <string name="bmw_735li">BMW 735Li</string>
+    <string name="color">Color:</string>
+    <string name="model">Model:</string>
+    <string name="customer_info">Customer Info</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="fill_form_before_ride">Fill Form Before Ride</string>
+    <string name="fill_form_after_ride">Fill Form After Ride</string>
+    <string name="today">Today</string>
+    <string name="accept">Accept</string>
+    <string name="logIn">Login</string>
+    <string name="home">Home</string>
+    <string name="travel">Travel</string>
+    <string name="information">Information</string>
 </resources>

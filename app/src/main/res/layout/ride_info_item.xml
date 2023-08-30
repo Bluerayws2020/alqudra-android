@@ -9,7 +9,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="25dp"
-        android:layoutDirection="ltr"
 
         android:layout_height="25dp"
         android:src="@drawable/pin_1"
@@ -31,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Alqudra Branch"
+        android:text="@string/alqudra_branch"
         android:textSize="18sp"
         android:fontFamily="@font/medium"
         app:layout_constraintStart_toEndOf="@+id/gps"

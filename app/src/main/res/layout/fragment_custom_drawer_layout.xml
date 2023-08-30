@@ -118,7 +118,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/medium"
-                android:text="Profile"
+                android:text="@string/profile"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -170,7 +170,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/medium"
-                android:text="Driving violations"
+                android:text="@string/driving_violations"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -219,7 +219,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/medium"
-                android:text="Notification"
+                android:text="@string/notification"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -270,7 +270,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/medium"
-                android:text="Terms &amp; conditions"
+                android:text="@string/terms_amp_conditions"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -311,7 +311,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/medium"
-                android:text="Sign out"
+                android:text="@string/sign_out"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -351,7 +351,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:fontFamily="@font/medium"
-                android:text="Call support"
+                android:text="@string/call_support"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
