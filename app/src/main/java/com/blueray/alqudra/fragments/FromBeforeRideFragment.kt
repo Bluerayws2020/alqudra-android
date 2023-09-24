@@ -15,18 +15,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.blueray.alqudra.R
 import com.blueray.alqudra.activities.MainActivity
 import com.blueray.alqudra.api.inProgressRides.Data
+import com.blueray.alqudra.databinding.ActivityMyProfileBinding
 import com.blueray.alqudra.databinding.FragmentFromBeforeRideBinding
 import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_STATUS
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE
 import com.blueray.alqudra.helpers.HelpersUtils.showMessage
+import com.blueray.alqudra.helpers.ViewUtils.hide
 import com.blueray.alqudra.model.NetworkResults
 import com.blueray.alqudra.viewModels.AppViewModel
 import com.blueray.alqudra.viewModels.FromBeforeRideViewModel
@@ -36,14 +41,19 @@ import com.google.android.material.button.MaterialButton
 import java.io.File
 
 
-class FromBeforeRideFragment : BaseFragment<FragmentFromBeforeRideBinding,AppViewModel>() {
+
+
+
+
+
+class FromBeforeRideActivity : AppCompatActivity() {
     private var fullType = "Full" // Default value
     private val defaultButtonColor = Color.GRAY
     private val selectedButtonColor = Color.RED
     private val defaultTextColor = Color.BLACK
     private val selectedTextColor = Color.WHITE
-    override val viewModel by viewModels<AppViewModel>()
-    private val REQUEST_CODE =100
+    val viewModel by viewModels<AppViewModel>()
+    private val REQUEST_CODE = 100
     private lateinit var imageData: String
     private var imageFile: File? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -51,26 +61,22 @@ class FromBeforeRideFragment : BaseFragment<FragmentFromBeforeRideBinding,AppVie
     private var latLocation: String? = ""
     private var longLocation: String? = ""
     private val IMAGE_REQUEST_CODE = 4
-    val navController = findNavController()
+    private lateinit var binding: FragmentFromBeforeRideBinding
 
-    override fun getViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentFromBeforeRideBinding {
-        return FragmentFromBeforeRideBinding.inflate(layoutInflater)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentFromBeforeRideBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         binding.includedTap.back.setOnClickListener {
-            (requireActivity() as MainActivity).onBackPressed()
+            onBackPressed()
         }
+        binding.includedTap.notifications.hide()
+        binding.includedTap.menu.hide()
         binding.includedTap.title.text = SELECTED_TRIP_STATUS
-        binding.includedTap.notifications.setOnClickListener {
-            findNavController().navigate(R.id.notifications)
-        }
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context?.applicationContext!!)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(applicationContext!!)
 
         binding.fullBtn.setOnClickListener {
             selectButton(binding.fullBtn, "Full")
@@ -84,62 +90,80 @@ class FromBeforeRideFragment : BaseFragment<FragmentFromBeforeRideBinding,AppVie
             selectButton(binding.lowBtn, "Low")
         }
 
+
         listOf(binding.fullBtn, binding.mediumBtn, binding.lowBtn).forEach { button ->
             button.setBackgroundColor(defaultButtonColor)
             button.setTextColor(defaultTextColor)
         }
 
-        // Select fullBtn by default
+
         selectButton(binding.fullBtn, fullType)
 
-        val tripData = arguments?.getSerializable("orderId") as? String
-        val groubTpe = arguments?.getSerializable("groubTpe") as? String
+        val tripData = intent?.getStringExtra("orderId") as? String
+        val groubTpe = intent?.getStringExtra("")
+
 
 
 
         binding.uploadPhotoBtn.setOnClickListener {
 //            image_Video=true
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S_V2){
-                if (ContextCompat.checkSelfPermission(requireContext(),android.Manifest.permission.READ_MEDIA_IMAGES ) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S_V2) {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.READ_MEDIA_IMAGES
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
                     // Permission is not granted, request it
-                    requestPermissions(arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES),REQUEST_CODE)
+                    requestPermissions(
+                        arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES),
+                        REQUEST_CODE
+                    )
                 } else {
                     image()
                 }
-            }else{
-                if (ContextCompat.checkSelfPermission(requireContext(),READ_EXTERNAL_STORAGE ) != PackageManager.PERMISSION_GRANTED) {
+            } else {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        READ_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
                     // Permission is not granted, request it
-                    requestPermissions(arrayOf(READ_EXTERNAL_STORAGE),REQUEST_CODE)
+                    requestPermissions(arrayOf(READ_EXTERNAL_STORAGE), REQUEST_CODE)
                 } else {
                     image()
-                }}
-isLocationPermissionGranted()
+                }
+            }
+            isLocationPermissionGranted()
 
         }
 
         getData()
-        if (imageFile == null && binding.KmEditText.editText?.text?.isEmpty() == true){
+        if (imageFile == null && binding.KmEditText.editText?.text?.isEmpty() == true) {
             binding.sendBtn.setBackgroundColor(Color.GRAY)
-        }else {
+        } else {
             binding.sendBtn.setBackgroundColor(Color.RED)
             binding.sendBtn.setTextColor(Color.WHITE)
 
         }
+
+
+
+
         binding.sendBtn.setOnClickListener {
             imageFile?.let { it1 ->
 
                 if (imageFile == null && binding.KmEditText.editText?.text?.isEmpty() == true) {
 
-              HelpersUtils.showMessage(requireContext(),"please Add ")
+                    HelpersUtils.showMessage(this, "please Add ")
 
-                }else {
+                } else {
                     viewModel.updateTrip(
                         tripData.toString(),
                         HelpersUtils.SELECTED_TRIP_TYPE_ID.toString(),
                         groubTpe.toString(),
                         binding.KmEditText.editText?.text.toString(),
                         fullType,
-                        it1,latLocation.toString(),longLocation.toString()
+                        it1, latLocation.toString(), longLocation.toString()
                     )
 
 
@@ -148,7 +172,9 @@ isLocationPermissionGranted()
 
             }
         }
+
     }
+
 
     private fun image() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -156,6 +182,7 @@ isLocationPermissionGranted()
         startActivityForResult(intent, IMAGE_REQUEST_CODE)
     }
 
+    // Select fullBtn by default
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -173,20 +200,22 @@ isLocationPermissionGranted()
 
         }
     }
+
     private fun getData() {
         viewModel.getUpdateTrip().observe(this) {
 
             when (it) {
                 is NetworkResults.Success -> {
 
-if (it.data.msg.status == 200){
-    showMessage(requireContext(),it.data.msg.message.toString())
-    navController.popBackStack()
+                    if (it.data.msg.status == 200) {
+                        showMessage(this, it.data.msg.message.toString())
+//                        navController.popBackStack()
+                        onBackPressed()
 
-}else {
-    showMessage(requireContext(),it.data.msg.message.toString())
+                    } else {
+                        showMessage(this, it.data.msg.message.toString())
 
-}
+                    }
 
                 }
 
@@ -202,7 +231,7 @@ if (it.data.msg.status == 200){
 
     private fun getFilePathFromUri(uri: Uri?): String {
         val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = context?.contentResolver?.query(uri!!, projection, null, null, null)
+        val cursor = contentResolver?.query(uri!!, projection, null, null, null)
 
         return if (cursor != null) {
             val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
@@ -214,6 +243,7 @@ if (it.data.msg.status == 200){
             uri?.path ?: ""
         }
     }
+
     private fun selectButton(selectedButton: MaterialButton, type: String) {
         listOf(binding.fullBtn, binding.mediumBtn, binding.lowBtn).forEach { button ->
             button.run {
@@ -234,14 +264,17 @@ if (it.data.msg.status == 200){
 
 
     //    permtion location
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == locationPermissionCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -250,15 +283,15 @@ if (it.data.msg.status == 200){
 
     private fun isLocationPermissionGranted(): Boolean {
         return if (ActivityCompat.checkSelfPermission(
-                requireContext(),
+                this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
+                this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
-                requireActivity(),
+                this,
                 arrayOf(
                     android.Manifest.permission.ACCESS_FINE_LOCATION,
                     android.Manifest.permission.ACCESS_COARSE_LOCATION
@@ -269,26 +302,21 @@ if (it.data.msg.status == 200){
         } else {
 
 
-
-
             fusedLocationClient.lastLocation
-                .addOnSuccessListener { location : Location? ->
-                    Log.d("Locatiooon!",location.toString())
-                    Log.d("Locatiooon!!",location?.latitude.toString())
-                    Log.d("Locatiooon!!!",location?.longitude.toString())
+                .addOnSuccessListener { location: Location? ->
+                    Log.d("Locatiooon!", location.toString())
+                    Log.d("Locatiooon!!", location?.latitude.toString())
+                    Log.d("Locatiooon!!!", location?.longitude.toString())
 
                     if (location?.longitude.toString() != "" && location?.latitude.toString() != "") {
 
-                        Log.d("Locatiooon!",location.toString())
-                        Log.d("Locatiooon!!",location?.latitude.toString())
-                        Log.d("Locatiooon!!!",location?.longitude.toString())
+                        Log.d("Locatiooon!", location.toString())
+                        Log.d("Locatiooon!!", location?.latitude.toString())
+                        Log.d("Locatiooon!!!", location?.longitude.toString())
                         latLocation = location?.latitude.toString()
                         longLocation = location?.longitude.toString()
 
                     }
-
-
-
 
 
                 }
@@ -297,9 +325,10 @@ if (it.data.msg.status == 200){
             true
         }
     }
-
-
-
-
-
 }
+
+
+
+
+
+

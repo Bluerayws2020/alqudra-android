@@ -12,6 +12,11 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.blueray.alqudra.api.inProgressRides.Data
+
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import com.blueray.alqudra.repo.Repo.PASSWORD
+import com.blueray.alqudra.repo.Repo.USER_NAME
 import java.util.*
 
 object HelpersUtils {
@@ -67,5 +72,62 @@ object HelpersUtils {
         val configuration = Configuration()
         configuration.locale = locale
         resources.updateConfiguration(configuration, resources.displayMetrics)}
+
+
+    /*this function can be replaced by setting theme to no action bar theme and
+      calling AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) in the app class*/
+    fun setUpActivity(activity: AppCompatActivity){
+        activity.supportActionBar?.hide()
+        // calling this method in one Activity made it action in all the activities in the app
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) // should be called Once in App life cycle but no problem to call it more
+
+    }
+    const val ARABIC_LANGUAGE = "ar"
+    const val ENGLISH_LANGUAGE = "en"
+
+    fun setDefaultLanguage(context: Context, lang: String?) {
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        context.resources.updateConfiguration(
+            config,
+            context.resources.displayMetrics
+        )
+        val sharedPreferences = context.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
+        val editor =sharedPreferences.edit()
+        editor.putString("lang",lang)
+        editor.apply()
+    }
+//    fun changeLang(): String {
+//        return if (HomeActivity.Lang == ARABIC_LANGUAGE)
+//            "en"
+//        else
+//            "ar"
+//    }
+    fun getLang(mContext: Context?): String {
+        val sharedPreferences = mContext?.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
+        return sharedPreferences?.getString("lang", "ar")!!
+    }
+
+    fun getUID(mContext: Context?): String {
+        val sharedPreferences = mContext?.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
+        return sharedPreferences?.getString("uid", "0")!!
+    }
+
+
+    fun saveUserNameAndPassword(mContext: Context?,username:String,password:String){
+        val sharedPreferences= mContext?.getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE)
+        val editor=sharedPreferences?.edit()
+        editor?.putString(USER_NAME,username)
+        editor?.putString(PASSWORD,password)
+        editor?.apply()
+    }
+    fun getUserNameAndPassword(mContext: Context?,getEmailAndPassword:(email:String?,password:String?)->Unit) {
+        val sharedPreferences= mContext?.getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE)
+        var email=sharedPreferences?.getString(USER_NAME,"")
+        var password=sharedPreferences?.getString(PASSWORD,"")
+        getEmailAndPassword(email,password)
+    }
 
 }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="ltr"
+    
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.TripsListFragment">
@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="10"
-            android:text="Update Trip"
+            android:text="@string/update_trip"
             android:textColor="@color/red"
             android:backgroundTint="@color/white"
             tools:listitem="@layout/travel_item"

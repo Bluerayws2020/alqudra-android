@@ -13,6 +13,7 @@ import com.blueray.alqudra.databinding.FragmentTripsBinding
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_STATUS
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_STATUS_ID
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE
+import com.blueray.alqudra.helpers.ViewUtils.hide
 import com.blueray.alqudra.viewModels.AppViewModel
 
 class TripsFragment : BaseFragment<FragmentTripsBinding,AppViewModel>() {
@@ -30,9 +31,14 @@ class TripsFragment : BaseFragment<FragmentTripsBinding,AppViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // lock drawer
+        (activity as MainActivity).hideMenu()
+
         binding.includeTap.back.setOnClickListener {
-            (requireActivity() as MainActivity).onBackPressed()
+            (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()
         }
+        binding.includeTap.notifications.hide()
+        binding.includeTap.menu.hide()
         binding.includeTap.title.text = SELECTED_TRIP_TYPE
         binding.includeTap.notifications.setOnClickListener {
             findNavController().navigate(R.id.notifications)

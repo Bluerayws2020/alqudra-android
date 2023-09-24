@@ -12,7 +12,7 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent">
        <include
-           layout="@layout/action_bar"
+           layout="@layout/inner_action_bar"
            android:id="@+id/included_Tap"
            app:layout_constraintTop_toTopOf="parent"
            app:layout_constraintStart_toStartOf="parent"
@@ -20,6 +20,7 @@
            />
 
        <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/notificationsRv"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_marginTop="10dp"

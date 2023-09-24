@@ -6,6 +6,7 @@ import android.util.Log
 import com.blueray.alqudra.TripTraking
 import com.blueray.alqudra.api.ApiClient
 import com.blueray.alqudra.api.inProgressRides.InProgeassModel
+import com.blueray.alqudra.api.inProgressRides.LoginModel
 import com.blueray.alqudra.api.inProgressRides.Msg
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
 import com.blueray.alqudra.model.NetworkResults
@@ -234,4 +235,43 @@ object Repo {
         }
     }
 
+
+
+    suspend fun loginModel(
+        user_name:String,
+        password:String,
+        mac:String,
+        lang:String,
+
+
+
+        ): NetworkResults<LoginModel> {
+        return withContext(Dispatchers.IO) {
+
+            val langRequestBody = lang.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val user_nameBody = user_name.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val passwordBody = password.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val macBody = mac.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+
+            val auth = "$USER_NAME:$PASSWORD"
+            val base = "Basic ${Base64.encodeToString(auth.toByteArray(), Base64.NO_WRAP)}"
+
+
+            try {
+                val result = ApiClient.retrofitService.loginApi(
+                    base,
+                    user_nameBody,passwordBody,macBody,langRequestBody
+
+
+
+                )
+
+                NetworkResults.Success(result)
+
+            } catch (e: Exception) {
+                NetworkResults.Error(e)
+            }
+        }
+    }
 }

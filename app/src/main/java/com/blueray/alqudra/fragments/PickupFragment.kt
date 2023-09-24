@@ -99,7 +99,7 @@ var groubType = ""
 
             }
 
-            findNavController().navigate(R.id.action_tripDataFragment_to_fromBeforeRideFragment)
+            findNavController().navigate(R.id.action_tripDataFragment_to_fromBeforeRideFragment,bundle)
 
 
 

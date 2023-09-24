@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.TripsFragment"
     android:background="@color/background"
-    android:layoutDirection="ltr"
 
     >
 
@@ -39,15 +38,16 @@
                 android:layout_marginTop="20dp"
                 >
 
+
                 <View
                     android:id="@+id/view1"
-                    android:layout_width="7dp"
+                    android:layout_width="14dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
                     android:background="@drawable/buttun_red_corner"
                     android:backgroundTint="@color/red"
-                    app:layout_constraintStart_toStartOf="parent" />
-
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -58,6 +58,8 @@
                     android:background="@drawable/buttun_blue_corner"
                     android:backgroundTint="@color/darkGreyColor"
                     android:layout_marginEnd="10sp"
+                    android:id="@+id/inProcessLayout"
+                    android:layout_marginStart="-7dp"
                     >
 
                     <TextView
@@ -66,10 +68,10 @@
                         android:layout_height="96dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="In Process\n Trips"
+                        android:text="@string/in_process_n_trips"
                         android:fontFamily="@font/semibold"
                         android:textColor="@color/white"
-                        android:textSize="35dp"
+                        android:textSize="@dimen/_sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -86,7 +88,7 @@
                         android:layout_marginBottom="25dp"
                         android:fontFamily="@font/medium"
                         android:gravity="center_vertical|start"
-                        android:text="view More"
+                        android:text="@string/view_more"
                         android:textColor="@color/white"
                         android:textSize="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -104,6 +106,7 @@
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -118,7 +121,7 @@
 
                 <View
                     android:id="@+id/view2"
-                    android:layout_width="7dp"
+                    android:layout_width="14dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/buttun_red_corner"
@@ -135,6 +138,7 @@
                     android:background="@drawable/buttun_blue_corner"
                     android:backgroundTint="@color/darkGreyColor"
                     android:layout_marginEnd="10sp"
+                    android:layout_marginStart="-7dp"
                     >
 
                     <TextView
@@ -143,10 +147,10 @@
                         android:layout_height="96dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="Up Coming \n Trips"
+                        android:text="@string/up_coming_n_trips"
                         android:fontFamily="@font/semibold"
                         android:textColor="@color/white"
-                        android:textSize="35dp"
+                        android:textSize="@dimen/_sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -163,7 +167,7 @@
                         android:layout_marginBottom="25dp"
                         android:fontFamily="@font/medium"
                         android:gravity="center_vertical|start"
-                        android:text="view More"
+                        android:text="@string/view_more"
                         android:textColor="@color/white"
                         android:textSize="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -195,7 +199,7 @@
 
                 <View
                     android:id="@+id/view3"
-                    android:layout_width="7dp"
+                    android:layout_width="14dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/buttun_red_corner"
@@ -212,6 +216,7 @@
                     android:background="@drawable/buttun_blue_corner"
                     android:backgroundTint="@color/darkGreyColor"
                     android:layout_marginEnd="10sp"
+                    android:layout_marginStart="-7dp"
                     >
 
                     <TextView
@@ -220,10 +225,10 @@
                         android:layout_height="96dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="Complete \n Trips"
+                        android:text="@string/complete_n_trips"
                         android:fontFamily="@font/semibold"
                         android:textColor="@color/white"
-                        android:textSize="35dp"
+                        android:textSize="@dimen/_sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -240,7 +245,7 @@
                         android:layout_marginBottom="25dp"
                         android:fontFamily="@font/medium"
                         android:gravity="center_vertical|start"
-                        android:text="view More"
+                        android:text="@string/view_more"
                         android:textColor="@color/white"
                         android:textSize="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -272,7 +277,7 @@
 
                 <View
                     android:id="@+id/view4"
-                    android:layout_width="7dp"
+                    android:layout_width="14dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/buttun_red_corner"
@@ -289,6 +294,7 @@
                     android:background="@drawable/buttun_blue_corner"
                     android:backgroundTint="@color/darkGreyColor"
                     android:layout_marginEnd="10sp"
+                    android:layout_marginStart="-7dp"
                     >
 
                     <TextView
@@ -297,10 +303,10 @@
                         android:layout_height="96dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="Canceled \n Trips"
+                        android:text="@string/canceled_n_trips"
                         android:fontFamily="@font/semibold"
                         android:textColor="@color/white"
-                        android:textSize="35dp"
+                        android:textSize="@dimen/_sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -317,7 +323,7 @@
                         android:layout_marginBottom="25dp"
                         android:fontFamily="@font/medium"
                         android:gravity="center_vertical|start"
-                        android:text="view More"
+                        android:text="@string/view_more"
                         android:textColor="@color/white"
                         android:textSize="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"

@@ -20,6 +20,8 @@ import com.blueray.alqudra.databinding.FragmentTripsListBinding
 import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE_ID
 import com.blueray.alqudra.helpers.HelpersUtils.showMessage
+import com.blueray.alqudra.helpers.ViewUtils.hide
+import com.blueray.alqudra.helpers.ViewUtils.show
 import com.blueray.alqudra.model.NetworkResults
 import com.blueray.alqudra.viewModels.AppViewModel
 
@@ -38,20 +40,30 @@ class TripsListFragment() : BaseFragment<FragmentTripsListBinding,AppViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // lock drawer
+        (activity as MainActivity).hideMenu()
+
         binding.includeTap.back.setOnClickListener {
-            (requireActivity() as MainActivity).onBackPressed()
+            (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()
         }
+        binding.includeTap.notifications.hide()
+        binding.includeTap.menu.hide()
 
 
 Log.d("≈!!!", HelpersUtils.SELECTED_TRIP_STATUS_ID)
+
+        binding.progressBar.show()
         if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "1"){
 //Inprogercess Trip
+
+            showProgress()
             viewModel.retriveInPrograssTrip()
             getData()
 
 
         }else  if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "2"){
 //            UpComming
+            showProgress()
 
             viewModel.retriveUpcommingtrip()
 getUpcomming()
@@ -59,11 +71,15 @@ getUpcomming()
         }
         else if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "3"){
             //completd Trrip
+            showProgress()
+
             viewModel.retriveCompletdTrip()
 getCompletd()
         }
         else if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "4"){
             //cancel Trrip
+            showProgress()
+
             viewModel.retriveCancelTrip()
 getCancelTrip()
 
@@ -108,18 +124,27 @@ getCancelTrip()
 
             when (it) {
                 is NetworkResults.Success -> {
-
+                    binding.progressBar.hide()
+                    hideProgress()
                     if (it.data.msg.status == 200) {
                         tripsAdapter.list = it.data.data as ArrayList<Data>
                         tripsAdapter.notifyDataSetChanged()
                         showMessage(requireContext(),it.data.msg.message.toString())
+                        if (it.data.data.isEmpty()){
+                            binding.tvNoData.show()
 
+                        }else {
+                            binding.tvNoData.hide()
+
+                        }
 
                     } else {
 showMessage(requireContext(),it.data.msg.message.toString())
                     }
                 }
                 is NetworkResults.Error -> {
+                    binding.progressBar.hide()
+                    hideProgress()
                     Log.e("ayham", it.exception.toString())
                 }
 
@@ -134,12 +159,19 @@ showMessage(requireContext(),it.data.msg.message.toString())
 
             when (it) {
                 is NetworkResults.Success -> {
-
+                    binding.progressBar.hide()
+                    hideProgress()
                     if (it.data.msg.status == 200) {
                         tripsAdapter.list = it.data.data as ArrayList<Data>
                         tripsAdapter.notifyDataSetChanged()
                         showMessage(requireContext(),it.data.msg.message.toString())
+                        if (it.data.data.isEmpty()){
+                            binding.tvNoData.show()
 
+                        }else {
+                            binding.tvNoData.hide()
+
+                        }
 
                     } else {
                         showMessage(requireContext(),it.data.msg.message.toString())
@@ -148,6 +180,8 @@ showMessage(requireContext(),it.data.msg.message.toString())
                 }
 
                 is NetworkResults.Error -> {
+                    binding.progressBar.hide()
+                    hideProgress()
                     Log.e("ayham", it.exception.toString())
                 }
 
@@ -161,12 +195,19 @@ showMessage(requireContext(),it.data.msg.message.toString())
 
             when (it) {
                 is NetworkResults.Success -> {
-
+                    binding.progressBar.hide()
+                    hideProgress()
                     if (it.data.msg.status == 200) {
                         tripsAdapter.list = it.data.data as ArrayList<Data>
                         tripsAdapter.notifyDataSetChanged()
                         showMessage(requireContext(),it.data.msg.message.toString())
+                        if (it.data.data.isEmpty()){
+                            binding.tvNoData.show()
 
+                        }else {
+                            binding.tvNoData.hide()
+
+                        }
 
                     } else {
                         showMessage(requireContext(),it.data.msg.message.toString())
@@ -175,6 +216,8 @@ showMessage(requireContext(),it.data.msg.message.toString())
                 }
 
                 is NetworkResults.Error -> {
+                    binding.progressBar.hide()
+                    hideProgress()
                     Log.e("ayham", it.exception.toString())
                 }
 
@@ -188,20 +231,34 @@ showMessage(requireContext(),it.data.msg.message.toString())
 
             when (it) {
                 is NetworkResults.Success -> {
+                    binding.progressBar.hide()
+                    hideProgress()
 
                     if (it.data.msg.status == 200) {
                         tripsAdapter.list = it.data.data as ArrayList<Data>
                         tripsAdapter.notifyDataSetChanged()
                         showMessage(requireContext(),it.data.msg.message.toString())
 
+                        if (it.data.data.isEmpty()){
+                            binding.tvNoData.show()
+
+                        }else {
+                            binding.tvNoData.hide()
+
+                        }
+
 
                     } else {
+                        binding.tvNoData.show()
                         showMessage(requireContext(),it.data.msg.message.toString())
                     }
 
                 }
 
                 is NetworkResults.Error -> {
+                    binding.progressBar.hide()
+                    hideProgress()
+
                     Log.e("ayham", it.exception.toString())
                 }
 

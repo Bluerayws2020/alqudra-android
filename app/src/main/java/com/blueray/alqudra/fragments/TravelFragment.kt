@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blueray.alqudra.R
+import com.blueray.alqudra.activities.MainActivity
 import com.blueray.alqudra.adapters.TravelAdapter
 import com.blueray.alqudra.databinding.FragmentTravelBinding
 import com.blueray.alqudra.viewModels.TravelViewModel
@@ -28,9 +29,16 @@ class TravelFragment : BaseFragment<FragmentTravelBinding,TravelViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // unlock drawer
+        (activity as MainActivity).showDrawer()
+
         binding.includedTap.titleName.text = "Travel"
         binding.includedTap.notifications.setOnClickListener {
             findNavController().navigate(R.id.notifications)
+        }
+        binding.includedTap.menu.setOnClickListener {
+            (activity as MainActivity).openDrawer()
         }
 
 //        val lm = LinearLayoutManager(requireContext())
