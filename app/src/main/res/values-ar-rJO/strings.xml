@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">القدرة</string>
-    <string name="hi_zaid_omar">مرحبا</string>
+    <string name="hi_zaid_omar">%S،مرحبا</string>
     <string name="view_info_trips">عرض معلومات الرحلة</string>
     <string name="delivery_trip_completed">اكتملت الرحلة</string>
     <string name="save">حفظ</string>
@@ -62,4 +62,8 @@
     <string name="home">الرئيسية</string>
     <string name="travel">الرحلات</string>
     <string name="information">المعلومات</string>
+    <string name="error">Network Error</string>
+    <string name="fullNameError">full name can\'t be empty</string>
+    <string name="mobile_number_error">mobile number can\'t be empty</string>
+    <string name="email_error">Email can\'t be empty</string>
 </resources>

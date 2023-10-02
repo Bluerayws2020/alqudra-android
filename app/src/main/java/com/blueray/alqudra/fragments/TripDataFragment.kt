@@ -54,6 +54,9 @@ private lateinit var  inmodel:InProgeassModel
         binding.includedTap.back.setOnClickListener {
             (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()
         }
+        HelpersUtils.getName(requireContext()) {
+            binding.includedTap.name.text = getString(R.string.hi_zaid_omar, it)
+        }
         binding.includedTap.notifications.hide()
         binding.includedTap.menu.hide()
 

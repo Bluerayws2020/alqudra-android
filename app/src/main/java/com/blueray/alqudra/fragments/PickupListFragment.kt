@@ -39,7 +39,9 @@ class PickupListFragment :BaseFragment<PickuplistfragmentBinding,AppViewModel>()
 
         // lock drawer
         (activity as MainActivity).hideMenu()
-
+        HelpersUtils.getName(requireContext()) {
+            binding.includeTap.name.text = getString(R.string.hi_zaid_omar, it)
+        }
         binding.includeTap.back.setOnClickListener {
             (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()
         }

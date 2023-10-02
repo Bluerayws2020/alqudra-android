@@ -5,6 +5,8 @@ import com.blueray.alqudra.api.inProgressRides.InProgeassModel
 import com.blueray.alqudra.api.inProgressRides.LoginModel
 import com.blueray.alqudra.api.inProgressRides.Msg
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
+import com.blueray.alqudra.model.UpdateUserProfile
+import com.blueray.alqudra.model.ViewUserProfileModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Header
@@ -103,4 +105,22 @@ interface ApiServices {
         @Part("order_id") order_id: RequestBody,
 
         ): TripTraking
+
+    @Multipart
+    @POST("get-profile-by-id")
+    suspend fun getProfileById(
+        @Header("Authorization") auth: String,
+        @Part("uid") uid : RequestBody
+    ): ViewUserProfileModel
+    @Multipart
+    @POST("update-driver-info")
+    suspend fun updateDriverInfo(
+        @Header("Authorization") auth: String,
+        @Part("uid") uid : RequestBody,
+        @Part("first_name") first_name : RequestBody,
+        @Part("last_name") last_name : RequestBody,
+        @Part("dob") dop : RequestBody,
+        @Part("phone") phone : RequestBody,
+        @Part("email") email : RequestBody
+    ): UpdateUserProfile
 }

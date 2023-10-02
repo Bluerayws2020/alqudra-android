@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.blueray.alqudra.R
 import com.blueray.alqudra.adapters.VehicleViolationAdapter
 import com.blueray.alqudra.databinding.ActivityVehicleViolaitionsBinding
+import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.helpers.HelpersUtils.setUpActivity
 import com.blueray.alqudra.helpers.ViewUtils.hide
 
@@ -21,6 +22,11 @@ class VehicleViolationsActivity : BaseActivity() {
 
         // prepareActivity
         setUpActivity(this)
+
+        HelpersUtils.getName(this) {
+            binding.includedTap.name.text = getString(R.string.hi_zaid_omar, it)
+        }
+        binding.includedTap.title.hide()
 
         // show only the back button in the actionBar
         binding.includedTap.notifications.hide()

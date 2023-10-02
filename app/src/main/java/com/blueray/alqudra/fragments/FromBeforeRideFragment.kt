@@ -72,6 +72,9 @@ class FromBeforeRideActivity : AppCompatActivity() {
         binding.includedTap.back.setOnClickListener {
             onBackPressed()
         }
+        HelpersUtils.getName(this) {
+            binding.includedTap.name.text = getString(R.string.hi_zaid_omar, it)
+        }
         binding.includedTap.notifications.hide()
         binding.includedTap.menu.hide()
         binding.includedTap.title.text = SELECTED_TRIP_STATUS
@@ -154,7 +157,7 @@ class FromBeforeRideActivity : AppCompatActivity() {
 
                 if (imageFile == null && binding.KmEditText.editText?.text?.isEmpty() == true) {
 
-                    HelpersUtils.showMessage(this, "please Add ")
+                    showMessage(this, "please Add ")
 
                 } else {
                     viewModel.updateTrip(

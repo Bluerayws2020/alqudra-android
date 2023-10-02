@@ -15,6 +15,7 @@ import com.blueray.alqudra.api.inProgressRides.Data
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.contentValuesOf
 import com.blueray.alqudra.repo.Repo.PASSWORD
 import com.blueray.alqudra.repo.Repo.USER_NAME
 import java.util.*
@@ -27,6 +28,7 @@ object HelpersUtils {
 
     var SELECTED_TRIP_TYPE_ID = ""
     var SELECTED_TRIP_STATUS_ID= ""
+    var DRIVER_NAME = "Driver NAME"
 
     fun hideKeyBoard(activity: Activity) {
         //Find the currently focused view, so we can grab the correct window token from it.
@@ -85,6 +87,18 @@ object HelpersUtils {
     const val ARABIC_LANGUAGE = "ar"
     const val ENGLISH_LANGUAGE = "en"
 
+    fun setName(mContext: Context?,name: String){
+        val sharedPreferences = mContext?.getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        editor?.putString(DRIVER_NAME,name)
+        editor?.apply()
+    }
+    fun getName(mContext: Context?,listener:(name: String)->Unit){
+        val sharedPreferences = mContext?.getSharedPreferences(SHARED_PREF,Context.MODE_PRIVATE)
+        val name = sharedPreferences?.getString(DRIVER_NAME,"User")
+        listener(name ?: "User")
+    }
+
     fun setDefaultLanguage(context: Context, lang: String?) {
         val locale = Locale(lang)
         Locale.setDefault(locale)
@@ -128,6 +142,14 @@ object HelpersUtils {
         var email=sharedPreferences?.getString(USER_NAME,"")
         var password=sharedPreferences?.getString(PASSWORD,"")
         getEmailAndPassword(email,password)
+    }
+    fun clearSharedPreferences(mContext: Context?){
+        val sharedPreferences = mContext?.getSharedPreferences(HelpersUtils.SHARED_PREF,
+            AppCompatActivity.MODE_PRIVATE
+        )
+        val editor = sharedPreferences?.edit()
+        editor?.clear()
+        editor?.apply()
     }
 
 }

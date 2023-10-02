@@ -13,16 +13,26 @@ import androidx.navigation.ui.NavigationUI
 import com.blueray.alqudra.R
 import com.blueray.alqudra.databinding.ActivityMainBinding
 import com.blueray.alqudra.fragments.CustomDrawerLayout
+import com.blueray.alqudra.helpers.HelpersUtils.clearSharedPreferences
+import com.blueray.alqudra.helpers.HelpersUtils.getName
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    companion object{
+        var NAME = ""
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        getName(this){
+            name->
+            NAME = name
+        }
 
         // get navController
         val navHostFragment =
@@ -31,7 +41,6 @@ class MainActivity : BaseActivity() {
 
         // set the bottom App Bar with the nav controller
         NavigationUI.setupWithNavController(binding.bottomAppBar, navController)
-
         // disable placeHolders
         binding.bottomAppBar.menu.findItem(R.id.placeHolder1).isEnabled = false
         binding.bottomAppBar.menu.findItem(R.id.placeHolder2).isEnabled = false
@@ -49,6 +58,10 @@ class MainActivity : BaseActivity() {
                 }
                 R.id.travel->{
                     navController.navigate(R.id.travel)
+                    true
+                }
+                R.id.info->{
+                    navController.navigate((R.id.myProfileActivity))
                     true
                 }
                 else ->{
@@ -71,7 +84,8 @@ class MainActivity : BaseActivity() {
         CustomDrawerLayout.onItemSelectedListener {
             when(it){
                 CustomDrawerLayout.Options.PROFILE_LAYOUT ->{
-                    navController.navigate(R.id.home)
+                    navController.navigate((R.id.myProfileActivity))
+                    binding.bottomAppBar.selectedItemId = R.id.info
                     openDrawer()
                 }
 
@@ -82,6 +96,7 @@ class MainActivity : BaseActivity() {
 
                 CustomDrawerLayout.Options.NOTIFICATIONS ->{
                     navController.navigate(R.id.notifications)
+//                    binding.bottomAppBar.selectedItemId = R.id.travel
                     openDrawer()
                 }
 
@@ -96,11 +111,18 @@ class MainActivity : BaseActivity() {
                 }
 
                 CustomDrawerLayout.Options.SIGN_OUT ->{
-                    // nothing
+
+                    // clean shared preferences and redirect to login activity
+
+                    clearSharedPreferences(this)
+                    startActivity(Intent(this,LoginActivaty::class.java).apply {
+                        // Add a unique flag or action to the intent
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    })
+                    finish()
                 }
 
                 CustomDrawerLayout.Options.MY_DATA ->{
-                    startActivity(Intent(this,MyProfileActivity::class.java))
                     openDrawer()
                 }
             }

@@ -1,17 +1,16 @@
 package com.blueray.alqudra.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.blueray.alqudra.R
 import com.blueray.alqudra.activities.MainActivity
 import com.blueray.alqudra.adapters.TravelAdapter
 import com.blueray.alqudra.databinding.FragmentTravelBinding
+import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.viewModels.TravelViewModel
 
 
@@ -32,8 +31,13 @@ class TravelFragment : BaseFragment<FragmentTravelBinding,TravelViewModel>() {
 
         // unlock drawer
         (activity as MainActivity).showDrawer()
+        HelpersUtils.getName(requireContext()) {
+            binding.includedTap.titleName.text = getString(R.string.hi_zaid_omar, it)
+        }
 
-        binding.includedTap.titleName.text = "Travel"
+        HelpersUtils.getName(requireContext()) {
+            binding.includedTap.titleName.text = getString(R.string.hi_zaid_omar, it)
+        }
         binding.includedTap.notifications.setOnClickListener {
             findNavController().navigate(R.id.notifications)
         }

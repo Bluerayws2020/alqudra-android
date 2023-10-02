@@ -14,7 +14,9 @@ import com.blueray.alqudra.databinding.ActivityMainBinding
 import com.blueray.alqudra.databinding.FragmentFromBeforeRideBinding
 import com.blueray.alqudra.fragments.ProgressDialogFragment
 import com.blueray.alqudra.helpers.HelpersUtils
+import com.blueray.alqudra.helpers.HelpersUtils.DRIVER_NAME
 import com.blueray.alqudra.helpers.HelpersUtils.getUserNameAndPassword
+import com.blueray.alqudra.helpers.HelpersUtils.setName
 import com.blueray.alqudra.model.NetworkResults
 import com.blueray.alqudra.viewModels.AppViewModel
 
@@ -29,15 +31,10 @@ class LoginActivaty : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginActivatyBinding.inflate(layoutInflater)
         setContentView(binding.root)
-supportActionBar?.hide()
+        supportActionBar?.hide()
 
         binding.logins.setOnClickListener {
                 viewModel.retriveLoginModel(binding.emilTxt.text.toString(),binding.password.text.toString())
-
-//                HelpersUtils.showMessage(this, "All Feailds Are Requred ")
-
-
-
         }
 
 
@@ -75,11 +72,9 @@ supportActionBar?.hide()
         val sharedPreferences = getSharedPreferences(HelpersUtils.SHARED_PREF, MODE_PRIVATE)
         sharedPreferences.edit().apply {
             putString("uid", driver.loginModel.uid.toString())
-
-
             Log.d("UUIDSS",driver.loginModel.uid.toString())
         }.apply()
-
+        setName(this,driver.loginModel.name)
         val intentSignIn = Intent(this, MainActivity::class.java)
         startActivity(intentSignIn)
         finishAffinity()

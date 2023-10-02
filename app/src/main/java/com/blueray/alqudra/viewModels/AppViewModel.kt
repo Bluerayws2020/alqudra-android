@@ -14,11 +14,15 @@ import com.blueray.alqudra.api.inProgressRides.Msg
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
 import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.model.NetworkResults
+import com.blueray.alqudra.model.UpdateUserProfile
+import com.blueray.alqudra.model.ViewUserProfileModel
 import com.blueray.alqudra.repo.Repo
 import kotlinx.coroutines.launch
 import java.io.File
 
 class AppViewModel(application: Application): AndroidViewModel(application) {
+
+
     private val deviceId = HelpersUtils.getAndroidID(application.applicationContext)
     private val repo = Repo
     private val language = "ar"
@@ -38,7 +42,8 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
     private val updateTripLive = MutableLiveData<NetworkResults<UpdateTripResponse>>()
     private val tripTrakingLive = MutableLiveData<NetworkResults<TripTraking>>()
     private val loginLiveData = MutableLiveData<NetworkResults<LoginModel>>()
-
+    private val getProfileLiveData =MutableLiveData<NetworkResults<ViewUserProfileModel>>()
+    private val getUpdateProfileLiveData =MutableLiveData<NetworkResults<UpdateUserProfile>>()
 
 
     fun retriveInPrograssTrip(
@@ -171,6 +176,37 @@ fun updateTrip(
         }
     }
     fun getLogin()=loginLiveData
+
+
+    fun retrieveProfileById(
+
+        ){
+        viewModelScope.launch {
+            getProfileLiveData.value=repo.getProfileById(uid
+            )
+        }
+    }
+    fun getProfileById()=getProfileLiveData
+
+    fun retrieveUpdateProfile(
+        firstName : String,
+        lastName  : String,
+        dob : String,
+        phone : String,
+        email : String
+        ){
+        viewModelScope.launch {
+            getUpdateProfileLiveData.value=repo.updateProfileById(
+                uid,
+                firstName,
+                lastName,
+                dob,
+                phone,
+                email
+            )
+        }
+    }
+    fun getUpdateProfile()=getUpdateProfileLiveData
 
 
 

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.blueray.alqudra.api.OpenGoogleMap
 import com.blueray.alqudra.api.inProgressRides.LocationInfo
 import com.blueray.alqudra.databinding.RideInfoItemBinding
-// todo change the model of list
 class RideInfoAdapter(val list:List<LocationInfo>,val oo: OpenGoogleMap):RecyclerView.Adapter<RideInfoAdapter.MyViewHolder>() {
     inner class MyViewHolder (var binding : RideInfoItemBinding):ViewHolder(binding.root)
 
@@ -17,10 +16,9 @@ class RideInfoAdapter(val list:List<LocationInfo>,val oo: OpenGoogleMap):Recycle
     }
 
     override fun getItemCount(): Int =list.size
-//        list.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//        TODO implementation of this
+
         holder.binding.branchName.text = list[position].name
         holder.binding.time.text = list[position].time
 

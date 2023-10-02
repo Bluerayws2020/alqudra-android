@@ -2,7 +2,7 @@
     <string name="app_name" >alqudra</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="hi_zaid_omar" >Hi,Zaid Omar</string>
+    <string name="hi_zaid_omar" >Hi,%S</string>
     <string name="_12_jan">12 - Jan</string>
     <string name="view_info_trips" >View Info Trips</string>
     <string name="delivery_trip_completed" >Delivery trip completed</string>
@@ -65,4 +65,8 @@
     <string name="home">Home</string>
     <string name="travel">Travel</string>
     <string name="information">Information</string>
+    <string name="error">Network Error</string>
+    <string name="fullNameError">full name can\'t be empty</string>
+    <string name="mobile_number_error">mobile number can\'t be empty</string>
+    <string name="email_error">Email can\'t be empty</string>
 </resources>

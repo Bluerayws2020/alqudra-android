@@ -81,4 +81,9 @@
         android:id="@+id/fromBeforeRideFragment"
         android:name="com.blueray.alqudra.fragments.FromBeforeRideFragment"
         android:label="FromBeforeRideFragment" />
+    <fragment
+        android:id="@+id/myProfileActivity"
+        android:name="com.blueray.alqudra.activities.MyProfileActivity"
+        android:label="activity_my_profile"
+        tools:layout="@layout/activity_my_profile" />
 </navigation>

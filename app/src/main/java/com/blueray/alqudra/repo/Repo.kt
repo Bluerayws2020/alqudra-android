@@ -10,6 +10,8 @@ import com.blueray.alqudra.api.inProgressRides.LoginModel
 import com.blueray.alqudra.api.inProgressRides.Msg
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
 import com.blueray.alqudra.model.NetworkResults
+import com.blueray.alqudra.model.UpdateUserProfile
+import com.blueray.alqudra.model.ViewUserProfileModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -266,6 +268,70 @@ object Repo {
 
 
                 )
+
+                NetworkResults.Success(result)
+
+            } catch (e: Exception) {
+                NetworkResults.Error(e)
+            }
+        }
+    }
+    suspend fun getProfileById(
+        uid: String
+    ): NetworkResults<ViewUserProfileModel> {
+        return withContext(Dispatchers.IO) {
+
+            val uidRequestBody = uid.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+            val auth = "$USER_NAME:$PASSWORD"
+            val base = "Basic ${Base64.encodeToString(auth.toByteArray(), Base64.NO_WRAP)}"
+
+
+            try {
+                val result = ApiClient.retrofitService.getProfileById(
+                    base,
+                    uidRequestBody
+                )
+
+
+                NetworkResults.Success(result)
+
+            } catch (e: Exception) {
+                NetworkResults.Error(e)
+            }
+        }
+    }
+    suspend fun updateProfileById(
+        uid: String,
+        firstName : String,
+        lastName  : String,
+        dob : String,
+        phone : String,
+        email : String
+    ): NetworkResults<UpdateUserProfile> {
+        return withContext(Dispatchers.IO) {
+
+            val uidRequestBody = uid.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val firstNameRequestBody = firstName.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val lastNameRequestBody = lastName.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val dobRequestBody = dob.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val phoneRequestBody = phone.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val emailRequestBody = email.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+            val auth = "$USER_NAME:$PASSWORD"
+            val base = "Basic ${Base64.encodeToString(auth.toByteArray(), Base64.NO_WRAP)}"
+
+
+            try {
+                val result = ApiClient.retrofitService.updateDriverInfo(
+                    auth = base,
+                    uid = uidRequestBody,
+                    first_name = firstNameRequestBody,
+                    last_name = lastNameRequestBody,
+                    dop = dobRequestBody,
+                    phone = phoneRequestBody,
+                    email = emailRequestBody)
+
 
                 NetworkResults.Success(result)
 

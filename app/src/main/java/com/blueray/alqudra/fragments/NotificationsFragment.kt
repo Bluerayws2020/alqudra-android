@@ -11,6 +11,7 @@ import com.blueray.alqudra.R
 import com.blueray.alqudra.activities.MainActivity
 import com.blueray.alqudra.adapters.NotificationAdapter
 import com.blueray.alqudra.databinding.FragmentNotificationsBinding
+import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.helpers.ViewUtils.hide
 import com.blueray.alqudra.viewModels.NotificationViewModel
 
@@ -30,6 +31,10 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding,Notifica
 
         // lock drawer
         (activity as MainActivity).hideMenu()
+        HelpersUtils.getName(requireContext()) {
+            binding.includedTap.name.text = getString(R.string.hi_zaid_omar, it)
+        }
+        binding.includedTap.title.hide()
 
         binding.includedTap.back.setOnClickListener {
             (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()

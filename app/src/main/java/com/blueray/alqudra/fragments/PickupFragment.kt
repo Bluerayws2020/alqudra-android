@@ -55,6 +55,9 @@ class PickupFragment : BaseFragment<FragmentPickupBinding,AppViewModel>(){
 Log.d("orderIdorderId",orederID.toString())
 
 
+        HelpersUtils.getName(requireContext()) {
+            binding.includeTap.name.text = getString(R.string.hi_zaid_omar, it)
+        }
 
         viewModel.retriveTripTracking(orederID.toString())
         getData()

@@ -16,4 +16,6 @@ abstract class BaseActivity :AppCompatActivity(){
         super.attachBaseContext(newContext)
     }
 
+
+
 }

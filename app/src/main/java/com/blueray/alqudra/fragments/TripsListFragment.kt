@@ -46,6 +46,9 @@ class TripsListFragment() : BaseFragment<FragmentTripsListBinding,AppViewModel>(
         binding.includeTap.back.setOnClickListener {
             (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()
         }
+        HelpersUtils.getName(requireContext()) {
+            binding.includeTap.name.text = getString(R.string.hi_zaid_omar, it)
+        }
         binding.includeTap.notifications.hide()
         binding.includeTap.menu.hide()
 

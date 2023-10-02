@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.blueray.alqudra.R
 import com.blueray.alqudra.activities.MainActivity
 import com.blueray.alqudra.databinding.FragmentTripsBinding
+import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_STATUS
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_STATUS_ID
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE
@@ -33,6 +34,10 @@ class TripsFragment : BaseFragment<FragmentTripsBinding,AppViewModel>() {
 
         // lock drawer
         (activity as MainActivity).hideMenu()
+
+        HelpersUtils.getName(requireContext()) {
+            binding.includeTap.name.text = getString(R.string.hi_zaid_omar, it)
+        }
 
         binding.includeTap.back.setOnClickListener {
             (requireActivity() as MainActivity).onBackPressedDispatcher.onBackPressed()

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.blueray.alqudra.R
 import com.blueray.alqudra.activities.MainActivity
 import com.blueray.alqudra.databinding.FragmentHomeBinding
+import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_STATUS_ID
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE
 import com.blueray.alqudra.helpers.HelpersUtils.SELECTED_TRIP_TYPE_ID
@@ -29,6 +30,11 @@ class HomeFragment: BaseFragment<FragmentHomeBinding,AppViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // add the name of the user
+        HelpersUtils.getName(requireContext()) {
+            binding.includeTap.titleName.text = getString(R.string.hi_zaid_omar, it)
+        }
 
         // unlock drawer
         (activity as MainActivity).showDrawer()

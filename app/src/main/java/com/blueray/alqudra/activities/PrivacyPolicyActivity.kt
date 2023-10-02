@@ -20,6 +20,10 @@ class PrivacyPolicyActivity : BaseActivity() {
 
         // prepareActivity
         setUpActivity(this)
+        HelpersUtils.getName(this) {
+            binding.includedTap.name.text = getString(R.string.hi_zaid_omar, it)
+        }
+        binding.includedTap.title.hide()
 
         // show only the back button in the actionBar
         binding.includedTap.notifications.hide()
