@@ -100,8 +100,8 @@ if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "1"){
 
 
         binding.fillFromBeforeBtn.setOnClickListener {
-val intent = Intent(context,FromBeforeRideActivity::class.java)
-            intent.putExtra("orederId",tripData.first().order_id)
+            val intent = Intent(context,FromBeforeRideActivity::class.java)
+            intent.putExtra("orderId",tripData.first().order_id)
             startActivity(intent)
         }
 

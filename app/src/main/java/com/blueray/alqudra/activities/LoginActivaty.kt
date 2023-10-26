@@ -35,6 +35,10 @@ class LoginActivaty : BaseActivity() {
 
         binding.logins.setOnClickListener {
                 viewModel.retriveLoginModel(binding.emilTxt.text.toString(),binding.password.text.toString())
+//            val intentSignIn = Intent(this, MainActivity::class.java)
+//            startActivity(intentSignIn)
+//            finishAffinity()
+
         }
 
 

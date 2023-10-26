@@ -32,7 +32,7 @@
     <string name="medium">Medium</string>
     <string name="full">Full</string>
     <string name="fuel">Fuel</string>
-    <string name="km">KM</string>
+    <string name="km">Distance in KM</string>
     <string name="car_speedometer">Car speedometer</string>
     <string name="upload_photo">Upload Photo</string>
     <string name="delivery_n_trips">Delivery \n Trips</string>
@@ -69,4 +69,7 @@
     <string name="fullNameError">full name can\'t be empty</string>
     <string name="mobile_number_error">mobile number can\'t be empty</string>
     <string name="email_error">Email can\'t be empty</string>
+    <string name="forgetPassword">Forgot Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="login">Login</string>
 </resources>

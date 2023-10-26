@@ -17,7 +17,7 @@ import retrofit2.http.Part
 interface ApiServices {
 
     @Multipart
-    @POST("login/")
+    @POST("login")
     suspend fun loginApi(
         @Header("Authorization") auth: String,
 
@@ -46,7 +46,6 @@ interface ApiServices {
     suspend fun upCommingTrip(
 
         @Header("Authorization") auth: String,
-
         @Part("uid") uid: RequestBody,
 
         ): InProgeassModel

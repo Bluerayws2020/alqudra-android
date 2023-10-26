@@ -29,7 +29,7 @@
     <string name="medium">متوسط</string>
     <string name="full">ممتلئ</string>
     <string name="fuel">الوقود</string>
-    <string name="km">الكيلومترات</string>
+    <string name="km">المسافة بالكيلومترات</string>
     <string name="car_speedometer">عداد سرعة السيارة</string>
     <string name="upload_photo">اختر صورة</string>
     <string name="delivery_n_trips">رحلات \n التوصيل</string>
@@ -66,4 +66,7 @@
     <string name="fullNameError">full name can\'t be empty</string>
     <string name="mobile_number_error">mobile number can\'t be empty</string>
     <string name="email_error">Email can\'t be empty</string>
+    <string name="forgetPassword">نسيت كلمة السر ؟</string>
+    <string name="remember_me">تذكرني</string>
+    <string name="login">تسجيل الدخول</string>
 </resources>

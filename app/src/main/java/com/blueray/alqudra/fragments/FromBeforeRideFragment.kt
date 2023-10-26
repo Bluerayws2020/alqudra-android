@@ -68,6 +68,7 @@ class FromBeforeRideActivity : AppCompatActivity() {
 
         binding = FragmentFromBeforeRideBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val tripData = intent?.getStringExtra("orderId") as? String
 
         binding.includedTap.back.setOnClickListener {
             onBackPressed()
@@ -102,7 +103,7 @@ class FromBeforeRideActivity : AppCompatActivity() {
 
         selectButton(binding.fullBtn, fullType)
 
-        val tripData = intent?.getStringExtra("orderId") as? String
+
         val groubTpe = intent?.getStringExtra("")
 
 
@@ -163,7 +164,7 @@ class FromBeforeRideActivity : AppCompatActivity() {
                     viewModel.updateTrip(
                         tripData.toString(),
                         HelpersUtils.SELECTED_TRIP_TYPE_ID.toString(),
-                        groubTpe.toString(),
+                        "1",
                         binding.KmEditText.editText?.text.toString(),
                         fullType,
                         it1, latLocation.toString(), longLocation.toString()
