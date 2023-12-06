@@ -223,8 +223,9 @@ object Repo {
                     groubTypeBody,
                     kilosBody,
                     fuelBody,
-                    imgPart,latBody,
-                    longBody
+                    latBody,
+                    longBody,
+                    imgPart
 
                 )
 

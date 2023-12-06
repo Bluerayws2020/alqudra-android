@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.blueray.alqudra.Group
 import com.blueray.alqudra.R
 import com.blueray.alqudra.activities.MainActivity
 import com.blueray.alqudra.adapters.RideInfoAdapter
@@ -40,10 +42,6 @@ private lateinit var  inmodel:InProgeassModel
         container: ViewGroup?
     ): FragmentTripDataBinding {
         return FragmentTripDataBinding.inflate(layoutInflater)
-
-
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -122,11 +120,12 @@ if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "1"){
                         tripData = it.data.data as ArrayList<Data>
 
                         val data = tripData.first()
-
+                        viewModel.retriveTripTracking(data.order_id)
                         binding.tripId.text = "#" + data.order_id.toString()
                         binding.lastBranchName.text = data.order_items.delivery_branch_name.toString()
                         binding.LastTime.text = data.order_items.duration_end .toString()
                         binding.carName.text = data.customer_info?.name.toString()
+                        e("ayham",data.customer_info?.name.toString())
                         binding.customerPhoneNumber .text = data.customer_info?.phone_number.toString()
                         binding.carModel.text = data.order_items.car.toString()
                         var infList  = ArrayList<LocationInfo>()
@@ -164,6 +163,31 @@ if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "1"){
                 }
                 is NetworkResults.Error -> {
                     Log.e("ayham", it.exception.toString())
+                }
+
+                else -> {}
+            }
+        }
+    }
+
+    private fun getStatusData() {
+        viewModel.getTripTraking().observe(viewLifecycleOwner) {
+
+            when (it) {
+                is NetworkResults.Success -> {
+
+                    if (it.data.msg.status == 200) {
+
+
+                        HelpersUtils.showMessage(requireContext(), it.data.msg.message.toString())
+
+
+                    } else {
+                        HelpersUtils.showMessage(requireContext(), it.data.msg.message.toString())
+                    }
+                }
+                is NetworkResults.Error -> {
+                    e("ayham", it.exception.toString())
                 }
 
                 else -> {}

@@ -115,6 +115,7 @@
             app:layout_constraintTop_toBottomOf="@id/contactUsLayout"
             android:layout_marginTop="40dp"
             android:orientation="vertical"
+
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -124,10 +125,12 @@
                 android:textSize="22sp"
                 android:textColor="#4D555B"
                 android:fontFamily="@font/medium"
+                android:visibility="gone"
                 />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/type_spinner_layout"
                 app:layout_constraintTop_toTopOf="parent"
@@ -141,6 +144,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:fontFamily="@font/medium"
+                android:visibility="gone"
                 app:boxBackgroundColor="@color/white"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -161,6 +165,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@id/type_spinner_layout"
                     app:layout_constraintTop_toTopOf="@id/type_spinner_layout"
                     app:layout_constraintBottom_toBottomOf="@id/type_spinner_layout"

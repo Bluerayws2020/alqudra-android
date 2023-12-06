@@ -161,14 +161,18 @@ class FromBeforeRideActivity : AppCompatActivity() {
                     showMessage(this, "please Add ")
 
                 } else {
-                    viewModel.updateTrip(
-                        tripData.toString(),
-                        HelpersUtils.SELECTED_TRIP_TYPE_ID.toString(),
-                        "1",
-                        binding.KmEditText.editText?.text.toString(),
-                        fullType,
-                        it1, latLocation.toString(), longLocation.toString()
-                    )
+                    if (latLocation.isNullOrEmpty()){
+                        showMessage(this,"Please Turn on Location Services")
+                    }else{
+                        viewModel.updateTrip(
+                            tripData.toString(),
+                            HelpersUtils.SELECTED_TRIP_TYPE_ID.toString(),
+                            "1",
+                            binding.KmEditText.editText?.text.toString(),
+                            fullType,
+                            it1, latLocation.toString(), longLocation.toString()
+                        )
+                    }
 
 
                 }

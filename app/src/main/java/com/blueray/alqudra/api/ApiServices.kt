@@ -87,9 +87,10 @@ interface ApiServices {
         @Part("fuel") fuel: RequestBody,
 
 
-        @Part  dashbord :   MultipartBody.Part,
+
         @Part("lat") lat: RequestBody,
         @Part("lon") long: RequestBody,
+        @Part  dashbord :   MultipartBody.Part
 
 
         ): UpdateTripResponse
