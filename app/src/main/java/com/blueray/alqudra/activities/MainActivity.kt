@@ -123,6 +123,7 @@ class MainActivity : BaseActivity() {
                 }
 
                 CustomDrawerLayout.Options.MY_DATA ->{
+
                     openDrawer()
                 }
             }

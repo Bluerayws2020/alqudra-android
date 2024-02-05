@@ -76,7 +76,8 @@ class LoginActivaty : BaseActivity() {
         val sharedPreferences = getSharedPreferences(HelpersUtils.SHARED_PREF, MODE_PRIVATE)
         sharedPreferences.edit().apply {
             putString("uid", driver.loginModel.uid.toString())
-            Log.d("UUIDSS",driver.loginModel.uid.toString())
+            putString("name" ,driver.loginModel.name.toString())
+            Log.d("UUIDSS",driver.loginModel.name.toString())
         }.apply()
         setName(this,driver.loginModel.name)
         val intentSignIn = Intent(this, MainActivity::class.java)

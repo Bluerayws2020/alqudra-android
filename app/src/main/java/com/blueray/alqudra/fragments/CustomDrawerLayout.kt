@@ -65,7 +65,7 @@ class CustomDrawerLayout : Fragment() {
         fun setSelectedItem(selectedItem:Options){
             when(selectedItem){
                  Options.PROFILE_LAYOUT->{
-                    // todo implement set selected item layout variation
+
                 }
                 else ->{
 
