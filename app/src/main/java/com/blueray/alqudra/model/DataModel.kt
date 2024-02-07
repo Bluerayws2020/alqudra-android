@@ -22,5 +22,19 @@ data class ViewUserProfileData(
     val Phone: String,
     val dob: String,
     val email: String,
-    val name: String
+    val name: String,
+    val img: String
+)
+
+data class SendDriverNotificationseModel(
+    val `data`: List<NotificationseModel>,
+    val msg: Msg
+)
+
+data class NotificationseModel(
+    val Title: String,
+    val body: String,
+    val classification: String,
+    val order_id: String,
+    val time: String,
 )

@@ -5,18 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.blueray.alqudra.R
 import com.blueray.alqudra.databinding.FragmentCustomDrawerLayoutBinding
+import com.blueray.alqudra.helpers.HelpersUtils
+import com.blueray.alqudra.helpers.ViewUtils.hide
+import com.blueray.alqudra.model.NetworkResults
+import com.blueray.alqudra.viewModels.AppViewModel
+import com.bumptech.glide.Glide
 
 
 class CustomDrawerLayout : Fragment() {
 
     private lateinit var binding : FragmentCustomDrawerLayoutBinding
-
+    val viewModel: AppViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        viewModel.retrieveProfileById()
+        getUserData()
+
         binding = FragmentCustomDrawerLayoutBinding.inflate(layoutInflater)
 
         // set click listeners
@@ -85,5 +95,32 @@ class CustomDrawerLayout : Fragment() {
         CALL_SUPPORT,
         SIGN_OUT,
         MY_DATA
+    }
+
+    private fun getUserData(){
+
+        viewModel.getProfileById().observe(this){
+                result->
+            when(result){
+                is NetworkResults.Success -> {
+                    if (result.data.msg.status == 200){
+                        val data = result.data.data
+                        binding.nameTv.text =data.name
+                        binding.mobileNumberTv.setText(data.Phone)
+                        Glide.with(requireContext()).load(data.img).placeholder(R.drawable.profile_dummy_img).into(binding.profileImage)
+
+                    }else{
+                        HelpersUtils.showMessage(
+                            requireContext(),
+                            result.data.msg.message ?: getString(R.string.error)
+                        )
+                    }
+                }
+                is NetworkResults.Error ->{
+                    result.exception.printStackTrace()
+                    HelpersUtils.showMessage(requireContext(), getString(R.string.error))
+                }
+            }
+        }
     }
 }

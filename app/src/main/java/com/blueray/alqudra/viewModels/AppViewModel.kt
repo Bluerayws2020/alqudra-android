@@ -5,15 +5,14 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blueray.alqudra.TripTraking
 import com.blueray.alqudra.api.inProgressRides.InProgeassModel
 import com.blueray.alqudra.api.inProgressRides.LoginModel
-import com.blueray.alqudra.api.inProgressRides.Msg
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
 import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.model.NetworkResults
+import com.blueray.alqudra.model.SendDriverNotificationseModel
 import com.blueray.alqudra.model.UpdateUserProfile
 import com.blueray.alqudra.model.ViewUserProfileModel
 import com.blueray.alqudra.repo.Repo
@@ -45,11 +44,10 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
     private val getProfileLiveData =MutableLiveData<NetworkResults<ViewUserProfileModel>>()
     private val getUpdateProfileLiveData =MutableLiveData<NetworkResults<UpdateUserProfile>>()
 
+    private val getNotifications =MutableLiveData<NetworkResults<SendDriverNotificationseModel>>()
+
 
     fun retriveInPrograssTrip(
-
-
-
     ){
         viewModelScope.launch {
             inPrograssLive.value=repo.InProgressRides (
@@ -60,14 +58,19 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
         }
     }
     fun getInPrograssLive()=inPrograssLive
+    fun retriveNotifications(
+    ){
+        viewModelScope.launch {
+            getNotifications.value=repo.getNotifications (
+                uid
+            )
+        }
+    }
 
-
-
+    fun getNotificationsList()=getNotifications
 
 
     fun retriveUpcommingtrip(
-
-
 
     ){
         viewModelScope.launch {
@@ -80,11 +83,7 @@ class AppViewModel(application: Application): AndroidViewModel(application) {
     }
     fun getUpcomingTrip()=upCommingTripLive
 
-
-
     fun retriveCompletdTrip(
-
-
 
     ){
         viewModelScope.launch {
@@ -189,12 +188,13 @@ fun updateTrip(
     fun getProfileById()=getProfileLiveData
 
     fun retrieveUpdateProfile(
-        firstName : String,
-        lastName  : String,
-        dob : String,
-        phone : String,
-        email : String
-        ){
+        firstName: String,
+        lastName: String,
+        dob: String,
+        phone: String,
+        email: String,
+        imageData: String?
+    ){
         viewModelScope.launch {
             getUpdateProfileLiveData.value=repo.updateProfileById(
                 uid,
@@ -202,7 +202,8 @@ fun updateTrip(
                 lastName,
                 dob,
                 phone,
-                email
+                email,
+                imageData
             )
         }
     }

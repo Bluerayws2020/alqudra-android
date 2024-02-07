@@ -1,15 +1,14 @@
 package com.blueray.alqudra.repo
 
-import android.os.Message
 import android.util.Base64
 import android.util.Log
 import com.blueray.alqudra.TripTraking
 import com.blueray.alqudra.api.ApiClient
 import com.blueray.alqudra.api.inProgressRides.InProgeassModel
 import com.blueray.alqudra.api.inProgressRides.LoginModel
-import com.blueray.alqudra.api.inProgressRides.Msg
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
 import com.blueray.alqudra.model.NetworkResults
+import com.blueray.alqudra.model.SendDriverNotificationseModel
 import com.blueray.alqudra.model.UpdateUserProfile
 import com.blueray.alqudra.model.ViewUserProfileModel
 import kotlinx.coroutines.Dispatchers
@@ -18,8 +17,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.http.Header
-import retrofit2.http.Part
 import java.io.File
 
 object Repo {
@@ -48,9 +45,11 @@ object Repo {
                     uidBody
 
                 )
+                Log.e("***" , result.toString())
                 NetworkResults.Success(result)
 
             }catch (e:Exception){
+                Log.e("***" , e.toString())
                 NetworkResults.Error(e)
             }
         }
@@ -69,7 +68,6 @@ object Repo {
             val auth = "$USER_NAME:$PASSWORD"
             val base  ="Basic ${Base64.encodeToString(auth.toByteArray(), Base64.NO_WRAP)}"
 
-
             try {
                 val result= ApiClient.retrofitService.upCommingTrip(
                     base,
@@ -77,9 +75,11 @@ object Repo {
                     uidBody
 
                 )
+
                 NetworkResults.Success(result)
 
             }catch (e:Exception){
+
                 NetworkResults.Error(e)
             }
         }
@@ -304,11 +304,12 @@ object Repo {
     }
     suspend fun updateProfileById(
         uid: String,
-        firstName : String,
-        lastName  : String,
-        dob : String,
-        phone : String,
-        email : String
+        firstName: String,
+        lastName: String,
+        dob: String,
+        phone: String,
+        email: String,
+        imageData: String?
     ): NetworkResults<UpdateUserProfile> {
         return withContext(Dispatchers.IO) {
 
@@ -318,6 +319,10 @@ object Repo {
             val dobRequestBody = dob.toRequestBody("multipart/form-data".toMediaTypeOrNull())
             val phoneRequestBody = phone.toRequestBody("multipart/form-data".toMediaTypeOrNull())
             val emailRequestBody = email.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+            val imageFile = File(imageData)
+            val commercial_recordBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), imageFile)
+            val commercial_record_part  =  MultipartBody.Part.createFormData("profile_image", firstName, commercial_recordBody)
 
             val auth = "$USER_NAME:$PASSWORD"
             val base = "Basic ${Base64.encodeToString(auth.toByteArray(), Base64.NO_WRAP)}"
@@ -331,7 +336,8 @@ object Repo {
                     last_name = lastNameRequestBody,
                     dop = dobRequestBody,
                     phone = phoneRequestBody,
-                    email = emailRequestBody)
+                    email = emailRequestBody,
+                    image_profile = commercial_record_part)
 
 
                 NetworkResults.Success(result)
@@ -341,4 +347,32 @@ object Repo {
             }
         }
     }
+
+    suspend fun getNotifications(
+        uid: String
+    ): NetworkResults<SendDriverNotificationseModel> {
+        return withContext(Dispatchers.IO) {
+
+            val uidRequestBody = uid.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+            val auth = "$USER_NAME:$PASSWORD"
+            val base = "Basic ${Base64.encodeToString(auth.toByteArray(), Base64.NO_WRAP)}"
+
+
+            try {
+                val result = ApiClient.retrofitService.getSendDriverNotifications(
+                    base,
+                    uidRequestBody
+                )
+
+
+                NetworkResults.Success(result)
+
+            } catch (e: Exception) {
+                NetworkResults.Error(e)
+            }
+        }
+    }
+
+
 }

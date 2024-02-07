@@ -5,6 +5,7 @@ import com.blueray.alqudra.api.inProgressRides.InProgeassModel
 import com.blueray.alqudra.api.inProgressRides.LoginModel
 import com.blueray.alqudra.api.inProgressRides.Msg
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
+import com.blueray.alqudra.model.SendDriverNotificationseModel
 import com.blueray.alqudra.model.UpdateUserProfile
 import com.blueray.alqudra.model.ViewUserProfileModel
 import okhttp3.MultipartBody
@@ -34,7 +35,6 @@ interface ApiServices {
     suspend fun InPrograssModel(
 
         @Header("Authorization") auth: String,
-
         @Part("uid") uid: RequestBody,
 
         ): InProgeassModel
@@ -121,6 +121,15 @@ interface ApiServices {
         @Part("last_name") last_name : RequestBody,
         @Part("dob") dop : RequestBody,
         @Part("phone") phone : RequestBody,
-        @Part("email") email : RequestBody
+        @Part("email") email : RequestBody,
+        @Part image_profile :MultipartBody.Part
     ): UpdateUserProfile
+
+
+    @Multipart
+    @POST("send-driver-notification")
+    suspend fun getSendDriverNotifications(
+        @Header("Authorization") auth: String,
+        @Part("uid") uid : RequestBody
+    ): SendDriverNotificationseModel
 }

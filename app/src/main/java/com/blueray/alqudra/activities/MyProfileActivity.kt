@@ -1,7 +1,6 @@
 package com.blueray.alqudra.activities
 
 import android.Manifest
-import android.app.DatePickerDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -29,7 +28,6 @@ import com.blueray.alqudra.helpers.ViewUtils.isInputEmpty
 import com.blueray.alqudra.model.NetworkResults
 import com.blueray.alqudra.viewModels.AppViewModel
 import java.io.File
-import java.util.*
 
 class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() {
 
@@ -165,7 +163,7 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() 
         val email = binding.emailEt.text.toString()
 
         // call API
-        viewModel.retrieveUpdateProfile(firstName, lastName,date,phone,email)
+        viewModel.retrieveUpdateProfile(firstName, lastName,date,phone,email, imageData)
 
 
     }

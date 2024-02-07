@@ -162,6 +162,7 @@ showMessage(requireContext(),it.data.msg.message.toString())
 
             when (it) {
                 is NetworkResults.Success -> {
+
                     binding.progressBar.hide()
                     hideProgress()
                     if (it.data.msg.status == 200) {
