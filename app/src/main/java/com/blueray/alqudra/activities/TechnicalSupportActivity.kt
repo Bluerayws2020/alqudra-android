@@ -82,28 +82,28 @@ class TechnicalSupportActivity : BaseActivity() {
         }
 
 
-        binding.attachImageBtn.setOnClickListener {
-
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S_V2){
-                if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_MEDIA_IMAGES ) != PackageManager.PERMISSION_GRANTED) {
-                    // Permission is not granted, request it
-                    e("ayham","permission denied")
-                    requestPermissions(arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES),REQUEST_CODE)
-                } else {
-                    image()
-                }
-            }else{
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    // Permission is not granted, request it
-                    e("ayham","permission denied")
-                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),REQUEST_CODE)
-                } else {
-                    image()
-                }}
-
-
-
-    }
+//        binding.attachImageBtn.setOnClickListener {
+//
+//            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S_V2){
+//                if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_MEDIA_IMAGES ) != PackageManager.PERMISSION_GRANTED) {
+//                    // Permission is not granted, request it
+//                    e("ayham","permission denied")
+//                    requestPermissions(arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES),REQUEST_CODE)
+//                } else {
+//                    image()
+//                }
+//            }else{
+//                if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                    // Permission is not granted, request it
+//                    e("ayham","permission denied")
+//                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),REQUEST_CODE)
+//                } else {
+//                    image()
+//                }}
+//
+//
+//
+//    }
 
     }
     private fun image() {

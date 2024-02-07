@@ -5,15 +5,21 @@ import android.app.DatePickerDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import  android.content.ContextWrapper.*
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
+import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -29,20 +35,24 @@ import com.blueray.alqudra.helpers.ViewUtils.isInputEmpty
 import com.blueray.alqudra.model.NetworkResults
 import com.blueray.alqudra.viewModels.AppViewModel
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
-class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() {
+class MyProfileActivity : BaseFragment<ActivityMyProfileBinding, AppViewModel>() {
 
     override val viewModel: AppViewModel by viewModels()
     private val REQUEST_CODE = 100
     private val IMAGE_REQUEST_CODE = 101
-    private var  imageData : String? =null
-    private var  imageFile : File? =null
+    private var imageData: String? = null
+    private var imageFile: File? = null
+    private var userPhoto: File? = null
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): ActivityMyProfileBinding {
-        val binding : ActivityMyProfileBinding = ActivityMyProfileBinding.inflate(layoutInflater)
+        val binding: ActivityMyProfileBinding = ActivityMyProfileBinding.inflate(layoutInflater)
         return binding
     }
 
@@ -65,23 +75,38 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() 
 
         binding.uploadPhotoBtn.setOnClickListener {
 
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S_V2){
-                if (ContextCompat.checkSelfPermission(requireContext(),android.Manifest.permission.READ_MEDIA_IMAGES ) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S_V2) {
+                if (ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        android.Manifest.permission.READ_MEDIA_IMAGES
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
                     // Permission is not granted, request it
                     Log.e("ayham", "permission denied")
-                    requestPermissions(arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES),REQUEST_CODE)
+                    requestPermissions(
+                        arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES),
+                        REQUEST_CODE
+                    )
+                } else {
+                    image()
+
+                }
+            } else {
+                if (ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // Permission is not granted, request it
+                    Log.e("ayham", "permission denied")
+                    requestPermissions(
+                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                        REQUEST_CODE
+                    )
                 } else {
                     image()
                 }
-            }else{
-                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    // Permission is not granted, request it
-                    Log.e("ayham", "permission denied")
-                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),REQUEST_CODE)
-                } else {
-                    image()
-                }}
-
+            }
 
 
         }
@@ -127,25 +152,24 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() 
         }
 
 
-
     }
 
-    private fun validateData(){
-        if (binding.fullNameEt.isInputEmpty()){
+    private fun validateData() {
+        if (binding.fullNameEt.isInputEmpty()) {
             showMessage(requireContext(), getString(R.string.fullNameError))
             binding.fullNameEt.requestFocus()
             binding.fullNameEt.error = getString(R.string.fullNameError)
             return
         }
 
-        if (binding.mobileNumberET.isInputEmpty()){
+        if (binding.mobileNumberET.isInputEmpty()) {
             showMessage(requireContext(), getString(R.string.mobile_number_error))
             binding.mobileNumberET.requestFocus()
             binding.mobileNumberET.error = getString(R.string.mobile_number_error)
             return
         }
 
-        if (binding.emailEt.isInputEmpty()){
+        if (binding.emailEt.isInputEmpty()) {
             showMessage(requireContext(), getString(R.string.email_error))
             binding.emailEt.requestFocus()
             binding.emailEt.error = getString(R.string.email_error)
@@ -165,21 +189,30 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() 
         val email = binding.emailEt.text.toString()
 
         // call API
-        viewModel.retrieveUpdateProfile(firstName, lastName,date,phone,email)
+
+        userPhoto?.let {
+            viewModel.retrieveUpdateProfile(
+                firstName = firstName,
+                lastName = lastName,
+                dob = date,
+                phone = phone,
+                email = email,
+                img = it,
+            )
+        }
 
 
     }
 
     // observe to live data
-    private fun getUserData(){
+    private fun getUserData() {
 
-        viewModel.getProfileById().observe(this){
-            result->
-            when(result){
+        viewModel.getProfileById().observe(this) { result ->
+            when (result) {
                 is NetworkResults.Success -> {
-                    if (result.data.msg.status == 200){
+                    if (result.data.msg.status == 200) {
                         val data = result.data.data
-                        binding.userNameTv.text =data.name
+                        binding.userNameTv.text = data.name
                         binding.fullNameEt.setText(data.name)
                         binding.emailEt.setText(data.email)
                         binding.mobileNumberET.setText(data.Phone)
@@ -188,11 +221,15 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() 
                         // todo id to be discussed
                         binding.iDTextView.hide()
 
-                    }else{
-                        showMessage(requireContext(),result.data.msg.message ?: getString(R.string.error))
+                    } else {
+                        showMessage(
+                            requireContext(),
+                            result.data.msg.message ?: getString(R.string.error)
+                        )
                     }
                 }
-                is NetworkResults.Error ->{
+
+                is NetworkResults.Error -> {
                     result.exception.printStackTrace()
                     showMessage(requireContext(), getString(R.string.error))
                 }
@@ -206,7 +243,11 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() 
         startActivityForResult(intent, IMAGE_REQUEST_CODE)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         when (requestCode) {
             REQUEST_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -216,6 +257,7 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() 
                 }
                 return
             }
+
             IMAGE_REQUEST_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     image()
@@ -231,8 +273,10 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() 
 
     private fun showRotationalDialogForPermission() {
         AlertDialog.Builder(requireContext())
-            .setMessage("It looks like you have turned off permissions"
-                    + "required for this feature. It can be enable under App settings!!!")
+            .setMessage(
+                "It looks like you have turned off permissions"
+                        + "required for this feature. It can be enable under App settings!!!"
+            )
 
             .setPositiveButton("Go TO SETTINGS") { _, _ ->
 
@@ -254,18 +298,48 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode){
-            IMAGE_REQUEST_CODE->{
-                if(data != null){
-                    val uri=data.data
-                    imageData=getFilePathFromUri(uri)
-                    imageFile= File(imageData)
-                    showMessage(requireContext(),"تم اختيار صورة")
+        when (requestCode) {
+            IMAGE_REQUEST_CODE -> {
+                if (data != null) {
+                    val uri = data.data
+                    imageData = getFilePathFromUri(uri)
+                    imageFile = File(imageData)
+                    showMessage(requireContext(), "تم اختيار صورة")
                     binding.profileImage.setImageURI(uri)
-                }else{
-                    showMessage(requireContext(),"لم يتم اختيار اي صورة")
+                    userPhoto = saveImageToFile(binding.profileImage)
+                    Log.w("ASDFFDSEEEE", userPhoto.toString())
+                } else {
+                    showMessage(requireContext(), "لم يتم اختيار اي صورة")
                 }
             }
+        }
+    }
+
+    private fun saveImageToFile(imageView: ImageView): File? {
+        val bitmap: Bitmap = (imageView.drawable as BitmapDrawable).bitmap
+
+        val timeStamp: String =
+            SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+        return try {
+            // Create a file to save the image
+            val imageFile = File.createTempFile(
+                "JPEG_${timeStamp}_", /* prefix */
+                ".jpg", /* suffix */
+                storageDir /* directory */
+            )
+
+            // Write the bitmap to the file using a FileOutputStream
+            FileOutputStream(imageFile).use { outputStream ->
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            }
+
+            // Return the created image file
+            imageFile
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
         }
     }
 
@@ -283,32 +357,38 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding,AppViewModel>() 
             uri?.path ?: ""
         }
     }
-    // observe to live data
-    private fun getUpdatedData(){
 
-        viewModel.getUpdateProfile().observe(this){
-            result->
-            when(result){
+    // observe to live data
+    private fun getUpdatedData() {
+
+        viewModel.getUpdateProfile().observe(this) { result ->
+            when (result) {
                 is NetworkResults.Success -> {
-                    if (result.data.msg.status == 200){
-                        showMessage(requireContext(),result.data.msg.message)
+                    if (result.data.msg.status == 200) {
+                        showMessage(requireContext(), result.data.msg.message)
                         val data = result.data.data[0]
-                        binding.userNameTv.text =data.name
+                        binding.userNameTv.text = data.name
                         binding.fullNameEt.setText(data.name)
                         binding.emailEt.setText(data.email)
                         binding.mobileNumberET.setText(data.Phone)
                         binding.birthDatePicker.setText(data.dob)
-                        binding.includedTap.titleName.text =getString(R.string.hi_zaid_omar,data.name)
-                        setName(requireContext(),data.name)
+                        binding.includedTap.titleName.text =
+                            getString(R.string.hi_zaid_omar, data.name)
+                        setName(requireContext(), data.name)
+                        e("SFDHDFDF", userPhoto.toString())
                         // todo id to be discussed
                         binding.iDTextView.hide()
 
 
-                    }else{
-                        showMessage(requireContext(),result.data.msg.message ?: getString(R.string.error))
+                    } else {
+                        showMessage(
+                            requireContext(),
+                            result.data.msg.message ?: getString(R.string.error)
+                        )
                     }
                 }
-                is NetworkResults.Error ->{
+
+                is NetworkResults.Error -> {
                     result.exception.printStackTrace()
                     showMessage(requireContext(), getString(R.string.error))
                 }

@@ -308,7 +308,8 @@ object Repo {
         lastName  : String,
         dob : String,
         phone : String,
-        email : String
+        email : String,
+        img: File
     ): NetworkResults<UpdateUserProfile> {
         return withContext(Dispatchers.IO) {
 
@@ -318,7 +319,9 @@ object Repo {
             val dobRequestBody = dob.toRequestBody("multipart/form-data".toMediaTypeOrNull())
             val phoneRequestBody = phone.toRequestBody("multipart/form-data".toMediaTypeOrNull())
             val emailRequestBody = email.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-
+            val commercial_recordBody =
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(), img)
+            val commercial_record_part  =  MultipartBody.Part.createFormData("profile_image", img.name, commercial_recordBody)
             val auth = "$USER_NAME:$PASSWORD"
             val base = "Basic ${Base64.encodeToString(auth.toByteArray(), Base64.NO_WRAP)}"
 
@@ -331,7 +334,9 @@ object Repo {
                     last_name = lastNameRequestBody,
                     dop = dobRequestBody,
                     phone = phoneRequestBody,
-                    email = emailRequestBody)
+                    email = emailRequestBody ,
+                    img = commercial_record_part
+                    )
 
 
                 NetworkResults.Success(result)

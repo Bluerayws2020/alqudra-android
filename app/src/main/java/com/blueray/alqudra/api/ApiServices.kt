@@ -121,6 +121,7 @@ interface ApiServices {
         @Part("last_name") last_name : RequestBody,
         @Part("dob") dop : RequestBody,
         @Part("phone") phone : RequestBody,
-        @Part("email") email : RequestBody
+        @Part("email") email : RequestBody,
+        @Part img :MultipartBody.Part,
     ): UpdateUserProfile
 }

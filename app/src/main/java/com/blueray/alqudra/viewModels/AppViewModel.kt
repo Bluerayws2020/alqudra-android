@@ -193,7 +193,8 @@ fun updateTrip(
         lastName  : String,
         dob : String,
         phone : String,
-        email : String
+        email : String,
+        img: File
         ){
         viewModelScope.launch {
             getUpdateProfileLiveData.value=repo.updateProfileById(
@@ -202,7 +203,8 @@ fun updateTrip(
                 lastName,
                 dob,
                 phone,
-                email
+                email,
+                img = img
             )
         }
     }

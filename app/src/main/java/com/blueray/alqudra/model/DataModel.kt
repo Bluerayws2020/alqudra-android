@@ -22,5 +22,6 @@ data class ViewUserProfileData(
     val Phone: String,
     val dob: String,
     val email: String,
-    val name: String
+    val name: String,
+    val img:String
 )
