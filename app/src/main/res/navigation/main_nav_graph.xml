@@ -29,7 +29,15 @@
         android:id="@+id/notifications"
         android:name="com.blueray.alqudra.fragments.NotificationsFragment"
         android:label="fragment_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_notifications_to_tripDataFragment"
+            app:destination="@id/tripDataFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/tripsFragment"
         android:name="com.blueray.alqudra.fragments.TripsFragment"

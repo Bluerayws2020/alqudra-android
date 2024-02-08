@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blueray.alqudra.R
 import com.blueray.alqudra.activities.MainActivity
 import com.blueray.alqudra.adapters.NotificationAdapter
+import com.blueray.alqudra.api.OnItemClickListener
 import com.blueray.alqudra.databinding.FragmentNotificationsBinding
 import com.blueray.alqudra.helpers.HelpersUtils
 import com.blueray.alqudra.helpers.ViewUtils.hide
@@ -72,9 +74,18 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding,AppViewM
 //
 //                        }
 
-                        Log.e("***", it.toString())
+
                         binding.notificationsRv.layoutManager = LinearLayoutManager(requireContext())
-                        binding.notificationsRv.adapter = NotificationAdapter(list)
+                        binding.notificationsRv.adapter = NotificationAdapter(list, object :
+                            OnItemClickListener {
+                            override fun onItemClick(position: Int) {
+                                val bundle = Bundle().apply {
+                                    putSerializable("orderId", list[position].order_id)
+                                }
+                                findNavController().navigate(R.id.action_notifications_to_tripDataFragment,bundle)
+                            }
+
+                        })
 
                     } else {
                         HelpersUtils.showMessage(requireContext(), it.data.msg.message.toString())
@@ -82,7 +93,6 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding,AppViewM
                 }
                 is NetworkResults.Error -> {
                     hideProgress()
-                    Log.e("***", it.exception.toString())
                 }
 
                 else -> {}

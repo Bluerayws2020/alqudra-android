@@ -7,6 +7,7 @@ import com.blueray.alqudra.api.ApiClient
 import com.blueray.alqudra.api.inProgressRides.InProgeassModel
 import com.blueray.alqudra.api.inProgressRides.LoginModel
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
+import com.blueray.alqudra.api.inProgressRides.tripDetailModel
 import com.blueray.alqudra.model.NetworkResults
 import com.blueray.alqudra.model.SendDriverNotificationseModel
 import com.blueray.alqudra.model.UpdateUserProfile
@@ -24,6 +25,36 @@ object Repo {
     const val USER_NAME = "qudrah"
     const val PASSWORD = "PW@1989+-*/"
 
+    suspend fun tripById(
+        orderId:String,
+        lang:String,
+
+        ): NetworkResults<InProgeassModel> {
+        return withContext(Dispatchers.IO){
+
+            val langRequestBody=lang.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val orderIdBody=orderId.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+            val auth = "$USER_NAME:$PASSWORD"
+            val base  ="Basic ${Base64.encodeToString(auth.toByteArray(), Base64.NO_WRAP)}"
+
+            try {
+                val result= ApiClient.retrofitService.getTripById(
+                    base,
+                    orderIdBody
+                )
+                Log.e("***" , orderId)
+                Log.e("***" , result.toString())
+                NetworkResults.Success(result)
+
+            }catch (e:Exception){
+                Log.e("***" , e.toString())
+                NetworkResults.Error(e)
+            }
+        }
+    }
+
+
     suspend fun InProgressRides(
         uid:String,
         lang:String,
@@ -37,19 +68,14 @@ object Repo {
             val auth = "$USER_NAME:$PASSWORD"
             val base  ="Basic ${Base64.encodeToString(auth.toByteArray(), Base64.NO_WRAP)}"
 
-
             try {
                 val result= ApiClient.retrofitService.InPrograssModel(
                   base,
-
                     uidBody
-
                 )
-                Log.e("***" , result.toString())
                 NetworkResults.Success(result)
 
             }catch (e:Exception){
-                Log.e("***" , e.toString())
                 NetworkResults.Error(e)
             }
         }
@@ -309,7 +335,7 @@ object Repo {
         dob: String,
         phone: String,
         email: String,
-        imageData: String?
+        imageData: File
     ): NetworkResults<UpdateUserProfile> {
         return withContext(Dispatchers.IO) {
 
@@ -320,9 +346,8 @@ object Repo {
             val phoneRequestBody = phone.toRequestBody("multipart/form-data".toMediaTypeOrNull())
             val emailRequestBody = email.toRequestBody("multipart/form-data".toMediaTypeOrNull())
 
-            val imageFile = File(imageData)
-            val commercial_recordBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), imageFile)
-            val commercial_record_part  =  MultipartBody.Part.createFormData("profile_image", firstName, commercial_recordBody)
+            val commercial_recordBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), imageData)
+            val commercial_record_part  =  MultipartBody.Part.createFormData("img", firstName, commercial_recordBody)
 
             val auth = "$USER_NAME:$PASSWORD"
             val base = "Basic ${Base64.encodeToString(auth.toByteArray(), Base64.NO_WRAP)}"

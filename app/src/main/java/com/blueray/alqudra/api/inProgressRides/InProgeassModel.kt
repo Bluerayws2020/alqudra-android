@@ -7,3 +7,8 @@ data class InProgeassModel(
 data class UpdateTripResponse(
     val msg: Msg
 )
+
+data class tripDetailModel(
+    val `data`: Data? = null,
+    val msg: Msg
+)

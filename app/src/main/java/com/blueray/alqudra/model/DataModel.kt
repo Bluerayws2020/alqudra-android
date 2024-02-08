@@ -37,4 +37,6 @@ data class NotificationseModel(
     val classification: String,
     val order_id: String,
     val time: String,
+    val from: String,
+    val to: String
 )

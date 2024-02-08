@@ -33,6 +33,7 @@ import com.blueray.alqudra.helpers.ViewUtils.hide
 import com.blueray.alqudra.helpers.ViewUtils.isInputEmpty
 import com.blueray.alqudra.model.NetworkResults
 import com.blueray.alqudra.viewModels.AppViewModel
+import com.bumptech.glide.Glide
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -45,7 +46,7 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding, AppViewModel>()
     private val REQUEST_CODE = 100
     private val IMAGE_REQUEST_CODE = 101
     private var imageData: String? = null
-    private var imageFile: File? = null
+    private lateinit var imageFile: File
     private var userPhoto: File? = null
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -188,7 +189,7 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding, AppViewModel>()
         val email = binding.emailEt.text.toString()
 
         // call API
-        viewModel.retrieveUpdateProfile(firstName, lastName,date,phone,email, imageData)
+        viewModel.retrieveUpdateProfile(firstName, lastName,date,phone,email, imageFile)
 
 
     }
@@ -201,6 +202,7 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding, AppViewModel>()
                 is NetworkResults.Success -> {
                     if (result.data.msg.status == 200) {
                         val data = result.data.data
+                        Glide.with(requireContext()).load(data.img).placeholder(R.drawable.profile_dummy_img).into(binding.profileImage)
                         binding.userNameTv.text = data.name
                         binding.fullNameEt.setText(data.name)
                         binding.emailEt.setText(data.email)
@@ -356,6 +358,7 @@ class MyProfileActivity : BaseFragment<ActivityMyProfileBinding, AppViewModel>()
                     if (result.data.msg.status == 200) {
                         showMessage(requireContext(), result.data.msg.message)
                         val data = result.data.data[0]
+                        Glide.with(requireContext()).load(data.img).placeholder(R.drawable.ic_launcher_foreground).into(binding.profileImage)
                         binding.userNameTv.text = data.name
                         binding.fullNameEt.setText(data.name)
                         binding.emailEt.setText(data.email)

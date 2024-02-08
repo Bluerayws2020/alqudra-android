@@ -98,13 +98,9 @@ getCancelTrip()
             override fun getLisnerItem(pos: Data) {
 
                 val bundle = Bundle()
-                bundle.putSerializable("trip_data", pos)
-                    // This assumes 'selectedTrip' is Serializable. Change accordingly.
+                bundle.putSerializable("orderId", pos.order_id)
 
-
-                findNavController().navigate(R.id.action_tripsListFragment_to_tripDataFragment)
-
-
+                findNavController().navigate(R.id.action_tripsListFragment_to_tripDataFragment, bundle)
 
             }
 

@@ -29,14 +29,14 @@ import com.blueray.alqudra.model.NetworkResults
 import com.blueray.alqudra.viewModels.AppViewModel
 
 
-class TripDataFragment : BaseFragment<FragmentTripDataBinding,AppViewModel>() {
+class TripDataFragment : BaseFragment<FragmentTripDataBinding, AppViewModel>() {
 
     override val viewModel by viewModels<AppViewModel>()
     private lateinit var rideInfoAdapter: RideInfoAdapter
     lateinit var navController: NavController
 
-   lateinit var  tripData: ArrayList<Data>
-private lateinit var  inmodel:InProgeassModel
+    lateinit var tripData: List<Data>
+    private lateinit var inmodel: InProgeassModel
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -67,39 +67,47 @@ private lateinit var  inmodel:InProgeassModel
 
 //        val tripData = arguments?.getSerializable("trip_data") as? Data // Change 'Data' to your data class.
 
-        viewModel.retriveInPrograssTrip()
-getData()
+        val orderId = arguments?.getSerializable("orderId").toString()
+        viewModel.retriveSelectedTrip(orderId)
+        viewModel.retriveTripTracking(orderId)
+        getData()
 
-binding.LastRideInfo.setOnClickListener{
-val lat  = tripData.first().order_items.receiving_branch_lat_long.lat
-    val lon = tripData.first().order_items.receiving_branch_lat_long.lon
+//        viewModel.retriveInPrograssTrip()
+//        getData()
 
-
-    val name = tripData.first().order_items.receiving_branch_name
-
-    val strUri = "http://maps.google.com/maps?q=loc:$lat,$lon $name"
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(strUri))
-
-    intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity")
-
-    startActivity(intent)
-}
+        binding.LastRideInfo.setOnClickListener {
+            val lat = tripData.first().order_items.receiving_branch_lat_long.lat
+            val lon = tripData.first().order_items.receiving_branch_lat_long.lon
 
 
+            val name = tripData.first().order_items.receiving_branch_name
 
-if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "1"){
-    binding.buttonsLayouts.show()
+            val strUri = "http://maps.google.com/maps?q=loc:$lat,$lon $name"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(strUri))
 
-}else {
-    binding.buttonsLayouts.hide()
+            intent.setClassName(
+                "com.google.android.apps.maps",
+                "com.google.android.maps.MapsActivity"
+            )
 
-}
+            startActivity(intent)
+        }
+
+
+
+        if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "1") {
+            binding.buttonsLayouts.show()
+
+        } else {
+            binding.buttonsLayouts.hide()
+
+        }
 
 
 
         binding.fillFromBeforeBtn.setOnClickListener {
-            val intent = Intent(context,FromBeforeRideActivity::class.java)
-            intent.putExtra("orderId",tripData.first().order_id)
+            val intent = Intent(context, FromBeforeRideActivity::class.java)
+            intent.putExtra("orderId", tripData.first().order_id)
             startActivity(intent)
         }
 
@@ -108,43 +116,51 @@ if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "1"){
 
 
     private fun getData() {
-        viewModel.getInPrograssLive().observe(viewLifecycleOwner) {
+        viewModel.getSelected().observe(viewLifecycleOwner) {
 
             when (it) {
                 is NetworkResults.Success -> {
 
                     if (it.data.msg.status == 200) {
-
+                        Log.e("***", it.toString())
 //                        HelpersUtils.showMessage(requireContext(), it.data.msg.message.toString())
 
-                        tripData = it.data.data as ArrayList<Data>
+                        tripData = it.data.data as List<Data>
 
                         val data = tripData.first()
-                        viewModel.retriveTripTracking(data.order_id)
+
                         binding.tripId.text = "#" + data.order_id.toString()
-                        binding.lastBranchName.text = data.order_items.delivery_branch_name.toString()
-                        binding.LastTime.text = data.order_items.duration_end .toString()
+                        binding.lastBranchName.text =
+                            data.order_items.delivery_branch_name.toString()
+                        binding.LastTime.text = data.order_items.duration_end.toString()
                         binding.carName.text = data.customer_info?.name.toString()
-                        e("ayham",data.customer_info?.name.toString())
-                        binding.customerPhoneNumber .text = data.customer_info?.phone_number.toString()
+
+                        binding.customerPhoneNumber.text =
+                            data.customer_info?.phone_number.toString()
                         binding.carModel.text = data.order_items.car.toString()
-                        var infList  = ArrayList<LocationInfo>()
-                        infList?.add(LocationInfo(tripData.first()?.order_items?.delivery_branch_name.toString(),
-                            tripData.first()?.order_items?.duration_start.toString()
-                        ))
+                        var infList = ArrayList<LocationInfo>()
+                        infList.add(
+                            LocationInfo(
+                                tripData.first().order_items.delivery_branch_name.toString(),
+                                tripData.first().order_items.duration_start.toString()
+                            )
+                        )
 
 
-                        rideInfoAdapter = RideInfoAdapter(infList!! ,object :OpenGoogleMap{
+                        rideInfoAdapter = RideInfoAdapter(infList!!, object : OpenGoogleMap {
 
                             override fun onEvent(pos: Int) {
 
-                                val lat  = data.order_items.delivery_branch_lat_long.lat
+                                val lat = data.order_items.delivery_branch_lat_long.lat
                                 val lon = data.order_items.delivery_branch_lat_long.lon
                                 val name = data.order_items.delivery_branch_name
                                 val strUri = "http://maps.google.com/maps?q=loc:$lat,$lon $name"
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(strUri))
 
-                                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity")
+                                intent.setClassName(
+                                    "com.google.android.apps.maps",
+                                    "com.google.android.maps.MapsActivity"
+                                )
 
                                 startActivity(intent)
 
@@ -156,11 +172,11 @@ if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "1"){
                         binding.riderInfoRec.layoutManager = lm
 
 
-
                     } else {
                         HelpersUtils.showMessage(requireContext(), it.data.msg.message.toString())
                     }
                 }
+
                 is NetworkResults.Error -> {
                     Log.e("ayham", it.exception.toString())
                 }
@@ -186,6 +202,7 @@ if (HelpersUtils.SELECTED_TRIP_STATUS_ID == "1"){
                         HelpersUtils.showMessage(requireContext(), it.data.msg.message.toString())
                     }
                 }
+
                 is NetworkResults.Error -> {
                     e("ayham", it.exception.toString())
                 }

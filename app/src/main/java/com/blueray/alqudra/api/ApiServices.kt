@@ -5,6 +5,7 @@ import com.blueray.alqudra.api.inProgressRides.InProgeassModel
 import com.blueray.alqudra.api.inProgressRides.LoginModel
 import com.blueray.alqudra.api.inProgressRides.Msg
 import com.blueray.alqudra.api.inProgressRides.UpdateTripResponse
+import com.blueray.alqudra.api.inProgressRides.tripDetailModel
 import com.blueray.alqudra.model.SendDriverNotificationseModel
 import com.blueray.alqudra.model.UpdateUserProfile
 import com.blueray.alqudra.model.ViewUserProfileModel
@@ -28,6 +29,16 @@ interface ApiServices {
         @Part("lang") lang: RequestBody,
 
         ): LoginModel
+
+
+    @Multipart
+    @POST("get-order-by-id")
+    suspend fun getTripById(
+
+        @Header("Authorization") auth: String,
+        @Part("order_id") orderId: RequestBody,
+
+        ): InProgeassModel
 
 
     @Multipart
@@ -132,4 +143,5 @@ interface ApiServices {
         @Header("Authorization") auth: String,
         @Part("uid") uid : RequestBody
     ): SendDriverNotificationseModel
+
 }
